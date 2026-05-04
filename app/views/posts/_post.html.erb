@@ -34,7 +34,7 @@
 
   <h4>コメント</h4>
 
-  <% post.comments.order(created_at: :asc).each do |comment| %>
+  <% post.comments.sort_by(&:created_at).each do |comment| %>
     <p>
       <%= comment.body %><br>
       <small>

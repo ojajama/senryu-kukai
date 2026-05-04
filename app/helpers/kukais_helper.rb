@@ -1,0 +1,2 @@
+module KukaisHelper
+end

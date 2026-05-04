@@ -11,7 +11,7 @@
     <% @posts.each do |p| %>
       <li>
         <%= p.verse %><br>
-        投稿者：<%= p.user.email %><br>
+        投稿者：<%= link_to p.user.email, user_posts_path(p.user) %><br>
         投稿日：<%= l p.created_at, format: :short %>
       </li>
     <% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "post_revisions/show"
   get "comments/create"
   get "likes/create"
   get "likes/destroy"
@@ -23,4 +24,6 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create]
   end
+
+  resources :post_revisions, only: [:show]
 end

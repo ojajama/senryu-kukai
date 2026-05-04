@@ -1,0 +1,24 @@
+<h1>推敲の差分</h1>
+
+<p>
+  <%= link_to "句会に戻る", kukai_path(@revision.post.kukai) %>
+</p>
+
+<section>
+  <h2>変更前</h2>
+  <%= simple_format(h(@revision.before_verse)) %>
+</section>
+
+<section>
+  <h2>変更後</h2>
+  <%= simple_format(h(@revision.after_verse)) %>
+</section>
+
+<section>
+  <h2>差分</h2>
+
+  <%= raw Diffy::Diff.new(
+        @revision.before_verse.to_s,
+        @revision.after_verse.to_s
+      ).to_s(:html) %>
+</section>

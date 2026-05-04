@@ -17,11 +17,16 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.verse != post_params[:verse]
-      @post.post_revisions.create!(verse: @post.verse)
-    end
+    old_verse = @post.verse
 
     if @post.update(post_params)
+      if old_verse != @post.verse
+        @post.post_revisions.create!(
+          before_verse: old_verse,
+          after_verse: @post.verse
+        )
+      end
+
       redirect_to kukai_path(@post.kukai), notice: "投稿を更新しました。"
     else
       render :edit, status: :unprocessable_entity

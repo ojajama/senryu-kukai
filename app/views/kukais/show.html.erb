@@ -4,7 +4,7 @@
 <h2>お題</h2>
   <ul>
     <% @keywords.each do |k| %>
-      <li><%= k.word %></li>
+      <li><%= link_to k.word, kukai_keyword_path(@kukai, k) %></li>
     <% end %>
   </ul>
 

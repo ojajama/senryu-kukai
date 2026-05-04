@@ -1,0 +1,21 @@
+<h1><%= @kukai.title %></h1>
+
+<h2>お題:<%= @keyword.word %></h2>
+
+<p><%=link_to "句会に戻る", kukai_path(@kukai) %></p>
+
+<h3>投稿一覧</h3>
+
+<% if @posts.any? %>
+  <ul>
+    <% @posts.each do |p| %>
+      <li>
+        <%= p.verse %><br>
+        投稿者：<%= p.user.email %><br>
+        投稿日：<%= l p.created_at, format: :short %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>このお題には、まだ投稿がありません。</p>
+<% end %>

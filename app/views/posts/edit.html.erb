@@ -1,0 +1,21 @@
+<h1>投稿を編集</h1>
+
+<%= form_with model: @post, local: true do |f| %>
+  <div>
+    <%= f.label :keyword_id, "お題" %><br>
+    <%= f.collection_select :keyword_id, @post.kukai.keywords, :id, :word %>
+  </div>
+
+  <div>
+    <%= f.label :verse, "川柳" %><br>
+    <%= f.text_field :verse %>
+  </div>
+
+  <div>
+    <%= f.submit "更新する" %>
+  </div>
+<% end %>
+
+<p>
+  <%= link_to "句会に戻る", kukai_path(@post.kukai) %>
+</p>

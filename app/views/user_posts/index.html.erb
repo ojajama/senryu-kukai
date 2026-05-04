@@ -9,6 +9,16 @@
         句会：<%= p.kukai.title %>
         投稿日：<%= l p.created_at, format: :short %>
 
+        <% if user_signed_in? && p.user == current_user %>
+          <p>
+            <%= link_to "編集", edit_post_path(p) %>
+            <%= button_to "削除",
+                  post_path(p),
+                  method: :delete,
+                  data: { turbo_confirm: "本当に削除しますか？" } %>
+          </p>
+        <% end %>
+
         <p>いいね：<%= p.likes.count %>件</p>
 
           <% if user_signed_in? %>

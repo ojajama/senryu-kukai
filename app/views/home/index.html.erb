@@ -7,3 +7,11 @@
   <%= link_to "新規登録", new_user_registration_path %> |
   <%= link_to "ログイン", new_user_session_path %>
 <% end %>
+
+<% if @current_kukai.present? %>
+  <p>
+    <%= link_to "今月の句会へ", kukai_path(@current_kukai) %>（<%= @current_kukai.year %>年<%= @current_kukai.month %>月）
+  </p>
+<% else %>
+  <p>現在開催中の川柳句会はありません。</p>
+<% end %>

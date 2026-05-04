@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:index], controller: "user_posts"
   end
 
-  resources :posts, only: [] do
+  resources :posts, only: [:edit, :update, :destroy] do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create]
   end

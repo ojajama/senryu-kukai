@@ -1,0 +1,2 @@
+class Kukai < ApplicationRecord
+end

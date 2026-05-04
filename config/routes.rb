@@ -25,5 +25,13 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
 
-  resources :post_revisions, only: [:show]
+  resources :posts do
+    resources :post_revisions, only: [:index]
+  end
+
+  resources :post_revisions, only: [:show] do
+    member do
+      patch :restore
+    end
+  end
 end

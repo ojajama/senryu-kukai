@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "likes/create"
+  get "likes/destroy"
   get "user_posts/index"
   get "kukai_keywords/show"
   get "posts/create"
@@ -14,5 +16,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [] do
     resources :posts, only: [:index], controller: "user_posts"
+  end
+
+  resources :posts, only: [] do
+    resources :likes, only: [:create, :destroy]
   end
 end

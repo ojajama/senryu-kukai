@@ -1,2 +1,16 @@
 <h1><%= @kukai.title %></h1>
 <p><%= @kukai.year %>年 <%= @kukai.month %>月</p>
+
+<h2>お題</h2>
+  <ul>
+    <% @keywords.each do |k| %>
+      <li><%= k.word %></li>
+    <% end %>
+  </ul>
+
+<h2>投稿</h2>
+  <ul>
+    <% @kukai.posts.each do |p| %>
+      <li><%= p.verse %>(<%= p.user.email %>)</li>
+    <% end %>
+  </ul>

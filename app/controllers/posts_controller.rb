@@ -17,6 +17,10 @@ class PostsController < ApplicationController
   end
 
   def update
+    if @post.verse != post_params[:verse]
+      @post.post_revisions.create!(verse: @post.verse)
+    end
+
     if @post.update(post_params)
       redirect_to kukai_path(@post.kukai), notice: "投稿を更新しました。"
     else

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_04_081439) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_04_085706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -57,6 +57,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_04_081439) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "post_revisions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "post_id", null: false
+    t.datetime "updated_at", null: false
+    t.text "verse"
+    t.index ["post_id"], name: "index_post_revisions_on_post_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "keyword_id", null: false
@@ -87,6 +95,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_04_081439) do
   add_foreign_key "kukai_keywords", "kukais"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "post_revisions", "posts"
   add_foreign_key "posts", "keywords"
   add_foreign_key "posts", "kukais"
   add_foreign_key "posts", "users"

@@ -16,6 +16,21 @@
   </div>
 <% end %>
 
+<h2>推敲履歴</h2>
+
+<% if @post.post_revisions.any? %>
+  <ul>
+    <% @post.post_revisions.order(created_at: :desc).each do |r| %>
+      <li>
+        <%= r.verse %><br>
+        <small>投稿日：<%= l r.created_at, format: :short %></small>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>推敲履歴はありません。</p>
+<% end %>
+
 <p>
   <%= link_to "句会に戻る", kukai_path(@post.kukai) %>
 </p>

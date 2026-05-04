@@ -24,6 +24,25 @@
               <%= button_to "いいね", post_likes_path(p), method: :post %>
             <% end %>
           <% end %>
+
+          <h4>コメント</h4>
+
+          <% p.comments.order(created_at: :asc).each do |c| %>
+            <p>
+              <%= c.body %><br>
+              <small>
+                <%= c.user.email %>・<%= l c.created_at, format: :short %>
+              </small>
+            </p>
+          <% end %>
+
+          <% if user_signed_in? %>
+            <%= form_with model: [p, Comment.new] do |f| %>
+              <%= f.text_area :body %><br>
+              <%= f.submit "コメントする" %>
+            <% end %>
+          <% end %>
+
       </li>
     <% end %>
   </ul>

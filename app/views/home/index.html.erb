@@ -1,21 +1,12 @@
-<h1>川柳句会</h1>
-<% if user_signed_in? %>
-  <p>ようこそ、<%= current_user.email %> さん！</p>
-  <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
-<% else %>
-  <p>川柳句会へようこそ！</p>
-  <%= link_to "新規登録", new_user_registration_path %> |
-  <%= link_to "ログイン", new_user_session_path %>
-<% end %>
+<h2>川柳句会にようこそ</h2>
 
 <% if @current_kukai.present? %>
-  <p>
-    <%= link_to "今月の句会へ", kukai_path(@current_kukai) %>（<%= @current_kukai.year %>年<%= @current_kukai.month %>月）
-  </p>
+  <section class="current-kukai">
+    <p>
+      今月の句会：
+      <%= link_to @current_kukai.title, kukai_path(@current_kukai) %>
+    </p>
+  </section>
 <% else %>
   <p>現在開催中の川柳句会はありません。</p>
 <% end %>
-
-<p>
-  <%= link_to "句会一覧を見る", kukais_path %>
-</p>

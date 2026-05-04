@@ -25,51 +25,9 @@
     </div>
   <% end %>
 
-<h2>投稿</h2>
-  <ul>
-    <% @kukai.posts.each do |p| %>
-      <li><%= p.verse %>(<%= link_to p.user.email, user_posts_path(p.user) %>)
-
-        <% if user_signed_in? && p.user == current_user %>
-          <p>
-            <%= link_to "編集", edit_post_path(p) %>
-            <%= button_to "削除",
-                  post_path(p),
-                  method: :delete,
-                  data: { turbo_confirm: "本当に削除しますか？" } %>
-          </p>
-        <% end %>
-
-          <p>いいね：<%= p.likes.count %>件</p>
-
-          <% if user_signed_in? %>
-            <% like = current_user.likes.find_by(post: p) %>
-
-            <% if like %>
-              <%= button_to "いいねを取り消す", post_like_path(p, like), method: :delete %>
-            <% else %>
-              <%= button_to "いいね", post_likes_path(p), method: :post %>
-            <% end %>
-          <% end %>
-
-          <h4>コメント</h4>
-
-          <% p.comments.order(created_at: :asc).each do |c| %>
-            <p>
-              <%= c.body %><br>
-              <small>
-                <%= c.user.email %>・<%= l c.created_at, format: :short %>
-              </small>
-            </p>
-          <% end %>
-
-          <% if user_signed_in? %>
-            <%= form_with model: [p, Comment.new] do |f| %>
-              <%= f.text_area :body %><br>
-              <%= f.submit "コメントする" %>
-            <% end %>
-          <% end %>
-
-      </li>
-    <% end %>
-  </ul>
+<h2>新着投稿</h2>
+  <% if @posts.any? %>
+    <%= render @posts %>
+  <% else %>
+    <p>まだ投稿がありません。</p>
+  <% end %>

@@ -13,3 +13,50 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+   max-width: 760px;
+   margin: 0 auto;
+   padding: 16px;
+   line-height: 1.8;
+   font-family: system-ui, sans-serif;
+ }
+
+ header {
+   border-bottom: 1px solid #ddd;
+   margin-bottom: 24px;
+   padding-bottom: 12px;
+ }
+
+ nav {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 12px;
+   align-items: center;
+ }
+
+ article {
+   border-bottom: 1px solid #ddd;
+   padding: 16px 0;
+ }
+
+ input,
+ textarea,
+ select,
+ button {
+   font-size: 1rem;
+ }
+
+ textarea {
+   width: 100%;
+   min-height: 5em;
+ }
+
+ .current-kukai {
+   border: 1px solid #ddd;
+   padding: 16px;
+   margin: 16px 0;
+   border-radius: 8px;
+   background: #fafafa;
+ }
+ 

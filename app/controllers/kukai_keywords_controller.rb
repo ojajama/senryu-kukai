@@ -4,7 +4,7 @@ class KukaiKeywordsController < ApplicationController
     @keyword = @kukai.keywords.find(params[:id])
     @posts = @kukai.posts
                    .where(keyword: @keyword)
-                   .includes(:user)
+                   .includes(:user, :keyword, :likes, comments: :user)
                    .order(created_at: :desc)
   end
 end

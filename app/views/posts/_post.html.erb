@@ -1,0 +1,52 @@
+<article>
+  <h3><%= post.keyword.word %></h3>
+
+  <p><%= simple_format(h(post.verse)) %></p>
+
+  <p>
+    投稿者：
+    <%= link_to post.user.email, user_posts_path(post.user) %><br>
+    投稿日：<%= l post.created_at, format: :short %>
+  </p>
+
+  <p>いいね：<%= post.likes.size %>件</p>
+
+  <% if user_signed_in? %>
+    <% like = post.likes.find { |l| l.user_id == current_user.id } %>
+
+    <% if like %>
+      <%= button_to "いいねを取り消す", post_like_path(post, like), method: :delete %>
+    <% else %>
+      <%= button_to "いいね", post_likes_path(post), method: :post %>
+    <% end %>
+  <% end %>
+
+  <% if user_signed_in? && post.user == current_user %>
+    <p>
+      <%= link_to "編集", edit_post_path(post) %>
+
+      <%= button_to "削除",
+            post_path(post),
+            method: :delete,
+            data: { turbo_confirm: "本当に削除しますか？" } %>
+    </p>
+  <% end %>
+
+  <h4>コメント</h4>
+
+  <% post.comments.order(created_at: :asc).each do |comment| %>
+    <p>
+      <%= comment.body %><br>
+      <small>
+        <%= comment.user.email %>・<%= l comment.created_at, format: :short %>
+      </small>
+    </p>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with model: [post, Comment.new] do |f| %>
+      <%= f.text_area :body %><br>
+      <%= f.submit "コメントする" %>
+    <% end %>
+  <% end %>
+</article>

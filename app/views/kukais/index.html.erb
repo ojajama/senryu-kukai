@@ -1,0 +1,9 @@
+<h2>句会一覧</h2>
+
+<ul>
+  <% @kukais.each do |k| %>
+    <li>
+      <%= link_to k.title, kukai_path(k) %>
+    </li>
+  <% end %>
+</ul>

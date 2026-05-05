@@ -24,4 +24,14 @@ class PostRevisionsController < ApplicationController
 
     redirect_to kukai_path(post.kukai), notice: "版を変更しました。"
   end
+
+  def ai_comment
+    revision = PostRevision.find(params[:id])
+
+    revision.update!(
+      ai_comment: "テストコメント"
+    )
+
+    redirect_to post_revision_path(revision)
+  end
 end

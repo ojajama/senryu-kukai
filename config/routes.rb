@@ -34,4 +34,10 @@ Rails.application.routes.draw do
       patch :restore
     end
   end
+
+  resources :post_revisions do
+    member do
+      patch :ai_comment
+    end
+  end
 end

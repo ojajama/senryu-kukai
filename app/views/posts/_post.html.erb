@@ -60,5 +60,10 @@
       <%= link_to "推敲の流れを見る",
           post_post_revisions_path(post) %>
     </p>
+
+    <%= button_to "AIにコメントさせる",
+      ai_comment_post_revision_path(@revision),
+      method: :post %>
+
   <% end %>
 </article>

@@ -11,4 +11,5 @@ class KukaisController < ApplicationController
                    .includes(:user, :keyword, :likes, comments: :user)
                    .order(created_at: :desc)
   end
+
 end

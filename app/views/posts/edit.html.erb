@@ -22,7 +22,7 @@
   <ul>
     <% @post.post_revisions.order(created_at: :desc).each do |r| %>
       <li>
-        <%= r.verse %><br>
+        <%= r.after_verse %><br>
         <small>投稿日：<%= l r.created_at, format: :short %></small>
       </li>
     <% end %>

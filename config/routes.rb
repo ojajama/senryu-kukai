@@ -32,12 +32,8 @@ Rails.application.routes.draw do
   resources :post_revisions, only: [:show] do
     member do
       patch :restore
+      post :ai_comment
     end
   end
 
-  resources :post_revisions do
-    member do
-      patch :ai_comment
-    end
-  end
 end

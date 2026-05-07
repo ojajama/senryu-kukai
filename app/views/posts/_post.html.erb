@@ -9,17 +9,7 @@
     投稿日：<%= l post.created_at, format: :short %>
   </p>
 
-  <p>いいね：<%= post.likes.size %>件</p>
-
-  <% if user_signed_in? %>
-    <% like = post.likes.find { |l| l.user_id == current_user.id } %>
-
-    <% if like %>
-      <%= button_to "いいねを取り消す", post_like_path(post, like), method: :delete %>
-    <% else %>
-      <%= button_to "いいね", post_likes_path(post), method: :post %>
-    <% end %>
-  <% end %>
+  <%= render "posts/like_button", post: post %>
 
   <% if user_signed_in? && post.user == current_user %>
     <p>
@@ -60,10 +50,6 @@
       <%= link_to "推敲の流れを見る",
           post_post_revisions_path(post) %>
     </p>
-
-    <%= button_to "AIにコメントさせる",
-      ai_comment_post_revision_path(@revision),
-      method: :post %>
 
   <% end %>
 </article>

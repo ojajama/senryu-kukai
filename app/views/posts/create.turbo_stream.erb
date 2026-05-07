@@ -1,0 +1,9 @@
+<%= turbo_stream.replace "flash_message" do %>
+  <div id="flash_message" role="status" aria-live="polite">
+    <% if @post.persisted? %>
+      <p>投稿しました。</p>
+    <% else %>
+      <p>投稿できませんでした。</p>
+    <% end %>
+  </div>
+<% end %>

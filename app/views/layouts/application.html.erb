@@ -26,13 +26,15 @@
       </nav>
     </header>
 
-    <% if notice.present? %>
-      <p><%= notice %></p>
-    <% end %>
+    <div id="flash_message" role="status" aria-live="polite">
+        <% if notice.present? %>
+          <p><%= notice %></p>
+        <% end %>
 
-    <% if alert.present? %>
-      <p><%= alert %></p>
-    <% end %>
+        <% if alert.present? %>
+          <p><%= alert %></p>
+        <% end %>
+    </div>
 
     <main>
       <%= yield %>

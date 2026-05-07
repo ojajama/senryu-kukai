@@ -7,9 +7,16 @@ class PostsController < ApplicationController
     @post.kukai = @kukai
 
     if @post.save
-      redirect_to kukai_path(@kukai), notice: "投稿しました。"
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to kukai_path(@kukai), notice: "投稿しました。" }
+      end
+      
     else
-      redirect_to kukai_path(@kukai), alert: "投稿できませんでした。"
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to kukai_path(@kukai), alert: "投稿できませんでした。" }
+      end
     end
   end
 
@@ -27,7 +34,11 @@ class PostsController < ApplicationController
         )
       end
 
-      redirect_to kukai_path(@post.kukai), notice: "投稿を更新しました。"
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to kukai_path(@post.kukai), notice: "投稿を更新しました。" }
+      end
+
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,7 +47,12 @@ class PostsController < ApplicationController
   def destroy
     kukai = @post.kukai
     @post.destroy
-    redirect_to kukai_path(kukai), notice: "投稿を削除しました。"
+
+    respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to kukai_path(kukai), notice: "投稿を削除しました。" }
+     end
+
   end
 
   private

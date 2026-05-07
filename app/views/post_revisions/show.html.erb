@@ -5,18 +5,18 @@
 </p>
 
 <section>
-  <h3>変更前</h3>
+  <h3>推敲前</h3>
   <%= simple_format(h(@revision.before_verse)) %>
-  <%= button_to "変更前に戻す",
+  <%= button_to "推敲前に戻す",
       restore_post_revision_path(@revision),
       method: :patch,
       params: { target: "before" } %>
 </section>
 
 <section>
-  <h3>変更後</h3>
+  <h3>推敲後</h3>
   <%= simple_format(h(@revision.after_verse)) %>
-  <%= button_to "変更後に戻す",
+  <%= button_to "推敲後に戻す",
       restore_post_revision_path(@revision),
       method: :patch,
       params: { target: "after" } %>
@@ -30,4 +30,12 @@
         @revision.after_verse.to_s
       ).to_s(:html) %>
 </section>
+
+    <%= button_to "AIにコメントさせる",
+      ai_comment_post_revision_path(@revision),
+      method: :post,
+      data: { turbo_frame: "ai_comment_#{@revision.id}" } %>
+
+      <%= turbo_frame_tag "ai_comment_#{@revision.id}" do %>
+      <% end %>
 

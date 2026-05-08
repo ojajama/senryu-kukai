@@ -1,20 +1,9 @@
 <h1>投稿を編集</h1>
 
-<%= form_with model: @post, local: true do |f| %>
-  <div>
-    <%= f.label :keyword_id, "お題" %><br>
-    <%= f.collection_select :keyword_id, @post.kukai.keywords, :id, :word %>
-  </div>
-
-  <div>
-    <%= f.label :verse, "川柳" %><br>
-    <%= f.text_field :verse %>
-  </div>
-
-  <div>
-    <%= f.submit "更新する" %>
-  </div>
-<% end %>
+<%= render "form",
+      post: @post,
+      kukai: @post.kukai,
+      keywords: @keywords %>
 
 <h2>推敲履歴</h2>
 

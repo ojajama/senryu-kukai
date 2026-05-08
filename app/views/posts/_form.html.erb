@@ -1,19 +1,27 @@
-<%= form_with model: [kukai, post], local: true do |f| %>
-  <div>
-    <%= f.label :keyword_id, "お題" %>
-    <%= f.collection_select :keyword_id,
-          keywords,
-          :id,
-          :word,
-          prompt: "選択してください" %>
-  </div>
+<article id="<%= dom_id(post) if post.persisted? %>">
 
-  <div>
-    <%= f.label :verse, "川柳" %>
-    <%= f.text_field :verse %>
-  </div>
+  <%= form_with model: post, local: true do |f| %>
+    <div class="current-keyword">
+        <p class="form-label">お題を選ぶ</p>
 
-  <div>
-    <%= f.submit "投稿する" %>
-  </div>
-<% end %>
+        <div class="keyword-chips">
+          <% keywords.each do |k| %>
+            <label class="keyword-chip">
+              <%= f.radio_button :keyword_id, k.id %>
+              <span><%= k.word %></span>
+            </label>
+          <% end %>
+        </div>
+    </div>
+
+    <div class="form-row">
+      <%= f.label :verse, "川柳" %>
+      <%= f.text_area :verse, rows: 3 %>
+    </div>
+
+    <div>
+      <%= f.submit post.persisted? ? "更新する" : "投稿する", class: "primary-button" %>
+    </div>
+  <% end %>
+
+</article>

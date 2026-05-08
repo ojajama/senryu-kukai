@@ -1,20 +1,18 @@
-<h1><%= @kukai.title %></h1>
+<section class="kukai-header">
+  <h1 class="kukai-title"><%= @kukai.title %></h1>
 
-<h2>お題</h2>
-  <ul>
-    <% @keywords.each do |k| %>
-      <li><%= link_to k.word, kukai_keyword_path(@kukai, k) %></li>
-    <% end %>
-  </ul>
+  </section>
 
-<h2>投稿する</h2>
+  <section class="post-form-box">
 
-<div id="post_form">
-  <%= render "posts/form",
-        post: Post.new,
-        kukai: @kukai,
-        keywords: @keywords %>
-</div>
+  <div id="post_form">
+    <%= render "posts/form",
+          post: Post.new,
+          kukai: @kukai,
+          keywords: @keywords %>
+  </div>
+
+  </section>
 
 <h2>新着投稿</h2>
 

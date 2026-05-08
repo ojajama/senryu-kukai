@@ -62,3 +62,110 @@
  
 del { background: #ffecec;}
 ins { background: #eaffea;}
+
+/* 句会show.html.erbのスタイルを追加 */
+
+.kukai-title {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.kukai-month {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.kukai-keyword-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.kukai-keyword-label {
+  font-size: 0.85rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: #eee;
+}
+
+.kukai-keyword {
+  font-size: 1.6rem;
+}
+
+.kukai-help {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.post-form-box {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.current-keyword {
+  font-size: 1rem;
+}
+
+.form-row {
+  margin: 1rem 0;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+}
+
+.form-row textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+  padding: 0.7rem;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+}
+
+.primary-button {
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+}
+
+.keyword-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.keyword-chip {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.keyword-chip input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+.keyword-chip span {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #bbb;
+  background: white;
+}
+
+.keyword-chip input[type="radio"]:checked+span {
+  background: #222;
+  color: white;
+  border-color: #222;
+}

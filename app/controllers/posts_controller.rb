@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_own_post, only: [:edit, :update, :destroy]
+  before_action :set_keywords, only: [:create, :edit, :update]
   def create
     @kukai = Kukai.find(params[:kukai_id])
-    @keywords = Keyword.all
 
     @post = current_user.posts.build(post_params)
     @post.kukai = @kukai
@@ -42,17 +42,19 @@ class PostsController < ApplicationController
       end
 
     else
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
-    kukai = @post.kukai
     @post.destroy
 
     respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to kukai_path(kukai), notice: "投稿を削除しました。" }
+        format.html { redirect_to kukai_path(@post.kukai), notice: "投稿を削除しました。" }
      end
 
   end
@@ -60,7 +62,11 @@ class PostsController < ApplicationController
   private
 
   def set_own_post
-    @post = current_user.posts.find_by(id: params[:id])
+    @post = current_user.posts.find(params[:id])
+  end
+
+  def set_keywords
+    @keywords = Keyword.all
   end
 
   def post_params

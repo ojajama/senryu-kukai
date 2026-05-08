@@ -1,55 +1,16 @@
-<article>
-  <h3><%= post.keyword.word %></h3>
+<article id="<%= dom_id(post) %>" class="post-card">
 
-  <p><%= simple_format(h(post.verse)) %></p>
+<%= render "posts/post_body", post: post %>
 
-  <p>
-    投稿者：
-    <%= link_to post.user.email, user_posts_path(post.user) %><br>
-    投稿日：<%= l post.created_at, format: :short %>
-  </p>
+<%= render "posts/like_button", post: post %>
 
-  <%= render "posts/like_button", post: post %>
+<%= render "posts/post_actions", post: post %>
 
-  <% if user_signed_in? && post.user == current_user %>
-    <p>
-      <%= link_to "編集", edit_post_path(post) %>
+<details class="post-extra">
+  <summary>コメントや推敲履歴を見る</summary>
 
-      <%= button_to "削除",
-            post_path(post),
-            method: :delete,
-            data: { turbo_confirm: "本当に削除しますか？" } %>
-    </p>
-  <% end %>
+  <%= render "posts/comments_block", post: post %>
+  <%= render "posts/revision_summary", post: post %>
+</details>
 
-  <h4>コメント</h4>
-
-  <% post.comments.sort_by(&:created_at).each do |comment| %>
-    <p>
-      <%= comment.body %><br>
-      <small>
-        <%= comment.user.email %>・<%= l comment.created_at, format: :short %>
-      </small>
-    </p>
-  <% end %>
-
-  <% if user_signed_in? %>
-    <%= form_with model: [post, Comment.new] do |f| %>
-      <%= f.text_area :body %><br>
-      <%= f.submit "コメントする" %>
-    <% end %>
-  <% end %>
-
-  <% if post.post_revisions.any? %>
-    <p>
-      推敲 <%= post.post_revisions.size %>回<br>
-      <%= link_to "推敲履歴を見る",
-         post_revision_path(post.post_revisions.order(created_at: :desc).first) %>
-    </p>
-    <p>
-      <%= link_to "推敲の流れを見る",
-          post_post_revisions_path(post) %>
-    </p>
-
-  <% end %>
 </article>

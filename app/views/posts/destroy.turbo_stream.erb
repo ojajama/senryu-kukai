@@ -1,0 +1,7 @@
+<%= turbo_stream.remove @post %>
+
+<%= turbo_stream.replace "flash_message" do %>
+  <div id="flash_message" role="status" aria-live="polite">
+    <p>削除しました。</p>
+  </div>
+<% end %>

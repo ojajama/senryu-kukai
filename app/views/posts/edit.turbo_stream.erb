@@ -1,0 +1,6 @@
+<%= turbo_stream.replace @post do %>
+  <%= render "posts/form",
+        post: @post,
+        kukai: @post.kukai,
+        keywords: @keywords %>
+<% end %>

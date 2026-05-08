@@ -1,0 +1,16 @@
+<div id="post_revision_summary_<%= post.id %>">
+  <% if post.post_revisions.any? %>
+    <p>
+      推敲 <%= post.post_revisions.size %>回<br>
+      <%= link_to "推敲履歴を見る",
+          post_revision_path(post.post_revisions.order(created_at: :desc).first) %>
+    </p>
+
+    <p>
+      <%= link_to "推敲の流れを見る",
+          post_post_revisions_path(post) %>
+    </p>
+  <% else %>
+    <p>推敲履歴はまだありません。</p>
+  <% end %>
+</div>

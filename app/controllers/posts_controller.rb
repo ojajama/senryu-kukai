@@ -3,6 +3,8 @@ class PostsController < ApplicationController
   before_action :set_own_post, only: [:edit, :update, :destroy]
   def create
     @kukai = Kukai.find(params[:kukai_id])
+    @keywords = Keyword.all
+
     @post = current_user.posts.build(post_params)
     @post.kukai = @kukai
 

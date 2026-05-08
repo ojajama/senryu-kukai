@@ -1,3 +1,17 @@
+<%= turbo_stream.remove "no_posts" %>
+<%= turbo_stream.prepend "posts",
+      partial: "posts/post",
+      locals: { post: @post } %>
+      
+<%= turbo_stream.replace "post_form" do %>
+  <div id="post_form">
+    <%= render "posts/form",
+          post: Post.new,
+          kukai: @kukai,
+          keywords: @keywords %>
+  </div>
+<% end %>
+
 <%= turbo_stream.replace "flash_message" do %>
   <div id="flash_message" role="status" aria-live="polite">
     <% if @post.persisted? %>

@@ -9,25 +9,19 @@
 
 <h2>投稿する</h2>
 
-  <%= form_with model: [@kukai, Post.new], local: true do |f| %>
-    <div>
-      <%= f.label :keyword_id, "お題" %>
-      <%= f.collection_select :keyword_id, @keywords, :id, :word, prompt: "選択してください" %>
-    </div>
-
-    <div>
-      <%= f.label :verse, "川柳" %>
-      <%= f.text_field :verse %>
-    </div>
-
-    <div>
-      <%= f.submit "投稿する" %>
-    </div>
-  <% end %>
+<div id="post_form">
+  <%= render "posts/form",
+        post: Post.new,
+        kukai: @kukai,
+        keywords: @keywords %>
+</div>
 
 <h2>新着投稿</h2>
+
+<div id="posts">
   <% if @posts.any? %>
     <%= render @posts %>
   <% else %>
-    <p>まだ投稿がありません。</p>
+    <p id="no_posts">まだ投稿がありません。</p>
   <% end %>
+</div>

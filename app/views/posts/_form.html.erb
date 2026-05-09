@@ -1,6 +1,8 @@
 <article id="<%= dom_id(post) if post.persisted? %>">
 
-  <%= form_with model: post, local: true do |f| %>
+  <%= form_with model: post,
+        url: post.persisted? ? post_path(post) : kukai_posts_path(kukai),
+        data: { turbo: true } do |f| %>
     <div class="current-keyword">
         <p class="form-label">お題を選ぶ</p>
 

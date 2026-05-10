@@ -1,7 +1,12 @@
-<p>Hello <%= @email %>!</p>
+<p><%= @email %> さん</p>
 
 <% if @resource.try(:unconfirmed_email?) %>
-  <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
+  <p>川柳句会をご利用いただきありがとうございます。</p>
+  <p>アカウントのメールアドレスを <%= @resource.unconfirmed_email %> に変更する申請を受け付けました。</p>
+  <p>確認が完了するまで、現在のメールアドレスはそのまま使われます。</p>
 <% else %>
-  <p>We're contacting you to notify you that your email has been changed to <%= @resource.email %>.</p>
+  <p>川柳句会をご利用いただきありがとうございます。</p>
+  <p>アカウントのメールアドレスが <%= @resource.email %> に変更されました。</p>
 <% end %>
+
+<p>この変更に心当たりがない場合は、パスワードの再設定をご検討ください。</p>

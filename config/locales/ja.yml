@@ -1,4 +1,76 @@
 ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+        current_password: "現在のパスワード"
+        remember_me: "ログイン状態を保持する"
+  devise:
+    confirmations:
+      confirmed: "メールアドレスを確認しました。"
+      send_instructions: "メールアドレス確認用のメールを送信しました。"
+      send_paranoid_instructions: "登録済みのメールアドレスであれば、確認用メールを送信します。"
+    failure:
+      already_authenticated: "すでにログインしています。"
+      inactive: "アカウントが有効化されていません。"
+      invalid: "%{authentication_keys}またはパスワードが正しくありません。"
+      locked: "アカウントがロックされています。"
+      last_attempt: "次に失敗するとアカウントがロックされます。"
+      not_found_in_database: "%{authentication_keys}またはパスワードが正しくありません。"
+      timeout: "セッションの有効期限が切れました。もう一度ログインしてください。"
+      unauthenticated: "ログインまたは新規登録してください。"
+      unconfirmed: "メールアドレスの確認が必要です。"
+    mailer:
+      confirmation_instructions:
+        subject: "【川柳句会】メールアドレス確認のお願い"
+      reset_password_instructions:
+        subject: "【川柳句会】パスワード再設定のご案内"
+      unlock_instructions:
+        subject: "【川柳句会】アカウントロック解除のご案内"
+      email_changed:
+        subject: "【川柳句会】メールアドレス変更のお知らせ"
+      password_change:
+        subject: "【川柳句会】パスワード変更のお知らせ"
+    omniauth_callbacks:
+      failure: "%{kind}アカウントで認証できませんでした。理由：%{reason}"
+      success: "%{kind}アカウントで認証しました。"
+    passwords:
+      no_token: "パスワード再設定メールのリンクからアクセスしてください。"
+      send_instructions: "パスワード再設定メールを送信しました。"
+      send_paranoid_instructions: "登録済みのメールアドレスであれば、パスワード再設定メールを送信します。"
+      updated: "パスワードを変更しました。"
+      updated_not_active: "パスワードを変更しました。"
+    registrations:
+      destroyed: "アカウントを削除しました。"
+      signed_up: "登録しました。"
+      signed_up_but_inactive: "登録しました。アカウントが有効化されるまでログインできません。"
+      signed_up_but_locked: "登録しました。アカウントがロックされているためログインできません。"
+      signed_up_but_unconfirmed: "確認用メールを送信しました。メール内のリンクから登録を完了してください。"
+      update_needs_confirmation: "アカウント情報を更新しました。新しいメールアドレスの確認が必要です。"
+      updated: "アカウント情報を更新しました。"
+      updated_but_not_signed_in: "アカウント情報を更新しました。パスワードを変更したため、もう一度ログインしてください。"
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "すでにログアウトしています。"
+    unlocks:
+      send_instructions: "アカウントロック解除メールを送信しました。"
+      send_paranoid_instructions: "アカウントが存在する場合、ロック解除メールを送信します。"
+      unlocked: "アカウントのロックを解除しました。"
+  errors:
+    messages:
+      already_confirmed: "はすでに確認済みです。ログインしてください。"
+      confirmation_period_expired: "の確認期限が切れています。もう一度リクエストしてください。"
+      expired: "の有効期限が切れています。もう一度リクエストしてください。"
+      not_found: "が見つかりません。"
+      not_locked: "はロックされていません。"
+      not_saved:
+        one: "%{resource}を保存できませんでした。エラーが1件あります。"
+        other: "%{resource}を保存できませんでした。エラーが%{count}件あります。"
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"

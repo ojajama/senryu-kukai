@@ -301,6 +301,61 @@ ins { background: #eaffea;}
   margin: -8px 0 18px;
 }
 
+.page-header {
+  margin: 0 0 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d8d2c8;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.page-header p {
+  margin: 0.35rem 0 0;
+  color: #6b6258;
+}
+
+.list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.list-card {
+  padding: 14px;
+  border: 1px solid #d8d2c8;
+  border-radius: 8px;
+  background: #fffdf9;
+}
+
+.list-card h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.08rem;
+}
+
+.list-card p {
+  margin: 0;
+  color: #6b6258;
+}
+
+.mini-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.7rem;
+}
+
+.mini-links a {
+  display: inline-flex;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid #d8d2c8;
+  border-radius: 999px;
+  background: #f6fbfb;
+  text-decoration: none;
+}
+
 .auth-panel {
   max-width: 520px;
   margin: 0 auto 36px;

@@ -1,0 +1,13 @@
+<section class="page-header">
+  <h1>参加者一覧</h1>
+  <p>投稿者名から、その人の句をまとめて見られます。</p>
+</section>
+
+<div class="list-grid">
+  <% @users.each do |user| %>
+    <article class="list-card">
+      <h2><%= link_to user.display_name, user_posts_path(user) %></h2>
+      <p>投稿 <%= user.posts_count %>句</p>
+    </article>
+  <% end %>
+</div>

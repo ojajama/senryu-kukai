@@ -1,7 +1,23 @@
-<h1>お題一覧</h1>
+<section class="page-header">
+  <h1>お題一覧</h1>
+  <p>これまでの句会で使われたお題です。</p>
+</section>
 
-<ul>
-  <% @keywords.each do |k| %>
-    <li><%= k.word %></li>
+<div class="list-grid">
+  <% @keywords.each do |keyword| %>
+    <article class="list-card">
+      <h2><%= keyword.word %></h2>
+      <p>投稿 <%= keyword.posts_count %>句</p>
+
+      <% if keyword.kukais.any? %>
+        <div class="mini-links">
+          <% keyword.kukais.sort_by { |kukai| [kukai.year.to_i, kukai.month.to_i] }.reverse.each do |kukai| %>
+            <%= link_to kukai.title, kukai_keyword_path(kukai, keyword) %>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="muted-text">まだ句会に使われていません。</p>
+      <% end %>
+    </article>
   <% end %>
-</ul>
+</div>

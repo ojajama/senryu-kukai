@@ -16,6 +16,21 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to kukai_url(kukais(:one))
   end
 
+  test "turbo create form keeps kukai keywords only" do
+    sign_in users(:one)
+
+    post kukai_posts_url(kukais(:one), format: :turbo_stream), params: {
+      post: {
+        keyword_id: keywords(:one).id,
+        verse: "テスト川柳"
+      }
+    }
+
+    assert_response :success
+    assert_includes response.body, keywords(:one).word
+    assert_no_match(/#{Regexp.escape(keywords(:two).word)}/, response.body)
+  end
+
   test "should redirect create when signed out" do
     assert_no_difference("Post.count") do
       post kukai_posts_url(kukais(:one)), params: {

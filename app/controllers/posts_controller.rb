@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_own_post, only: [:edit, :update, :destroy]
-  before_action :set_keywords, only: [:create, :edit, :update]
+  before_action :set_keywords, only: [:edit, :update]
   def create
     @kukai = Kukai.find(params[:kukai_id])
+    @keywords = @kukai.keywords
 
     @post = current_user.posts.build(post_params)
     @post.kukai = @kukai
@@ -66,7 +67,7 @@ class PostsController < ApplicationController
   end
 
   def set_keywords
-    @keywords = Keyword.all
+    @keywords = @post.kukai.keywords
   end
 
   def post_params

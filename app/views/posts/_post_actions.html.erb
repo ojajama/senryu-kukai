@@ -1,6 +1,6 @@
   <% if user_signed_in? && post.user == current_user %>
     <div class="post-actions">
-      <%= link_to "編集", edit_post_path(post), data: { turbo_frame: true } %>
+      <%= link_to "編集", edit_post_path(post), data: { turbo_stream: true } %>
 
       <%= button_to "削除",
             post_path(post),

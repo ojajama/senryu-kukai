@@ -6,7 +6,7 @@
 <%= turbo_stream.replace "post_form" do %>
   <div id="post_form">
     <%= render "posts/form",
-          post: Post.new,
+          post: @post.persisted? ? Post.new : @post,
           kukai: @kukai,
           keywords: @keywords %>
   </div>

@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :keywords, only: [:index, :edit, :update]
+    resources :kukais, only: [:index, :new, :create]
   end
 
 end

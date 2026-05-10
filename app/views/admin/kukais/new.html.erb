@@ -1,0 +1,45 @@
+<section class="auth-panel">
+  <div class="section-heading">
+    <h1>新しい句会を作成</h1>
+  </div>
+
+  <%= form_with model: [:admin, @kukai], class: "auth-form" do |f| %>
+    <% if @kukai.errors.any? %>
+      <div class="form-errors">
+        <p>句会を保存できませんでした。</p>
+        <ul>
+          <% @kukai.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-row">
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title, autofocus: true %>
+    </div>
+
+    <div class="form-row two-columns">
+      <div>
+        <%= f.label :year, "年" %>
+        <%= f.number_field :year, min: 2000, max: 2100 %>
+      </div>
+      <div>
+        <%= f.label :month, "月" %>
+        <%= f.number_field :month, min: 1, max: 12 %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <%= label_tag :keyword_count, "ランダムに選ぶお題数" %>
+      <%= number_field_tag :keyword_count, @keyword_count, min: 1, max: 20 %>
+      <p class="form-hint">登録済みのお題ストックからランダムに選びます。</p>
+    </div>
+
+    <div class="form-actions">
+      <%= link_to "戻る", admin_kukais_path, class: "secondary-link" %>
+      <%= f.submit "作成する", class: "primary-button" %>
+    </div>
+  <% end %>
+</section>

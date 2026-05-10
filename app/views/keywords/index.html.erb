@@ -7,6 +7,20 @@
   <% @keywords.each do |keyword| %>
     <article class="list-card">
       <h2><%= keyword.word %></h2>
+      <p class="keyword-meta">
+        <% if keyword.reading.present? %>
+          <span><%= keyword.reading %></span>
+        <% end %>
+        <% if keyword.pos.present? %>
+          <span><%= keyword.pos %></span>
+        <% end %>
+        <% if keyword.category.present? %>
+          <span><%= keyword.category %></span>
+        <% end %>
+        <% if keyword.len.present? %>
+          <span><%= keyword.len %>音</span>
+        <% end %>
+      </p>
       <p>投稿 <%= keyword.posts_count %>句</p>
 
       <% if keyword.kukais.any? %>

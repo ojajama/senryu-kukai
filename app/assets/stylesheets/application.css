@@ -340,6 +340,21 @@ ins { background: #eaffea;}
   color: #6b6258;
 }
 
+.keyword-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.keyword-meta span {
+  display: inline-flex;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: #f1eee8;
+}
+
 .mini-links {
   display: flex;
   flex-wrap: wrap;

@@ -84,3 +84,4 @@ gem "ruby-openai"
 
 gem "dotenv-rails"
 
+gem "csv"

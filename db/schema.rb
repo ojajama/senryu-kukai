@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_10_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_10_123000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,9 +25,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_10_120000) do
   end
 
   create_table "keywords", force: :cascade do |t|
+    t.string "category"
     t.datetime "created_at", null: false
+    t.integer "len"
+    t.string "pos"
+    t.string "reading"
     t.datetime "updated_at", null: false
-    t.string "word"
+    t.string "word", null: false
+    t.index ["category"], name: "index_keywords_on_category"
+    t.index ["len"], name: "index_keywords_on_len"
+    t.index ["pos"], name: "index_keywords_on_pos"
+    t.index ["reading"], name: "index_keywords_on_reading"
+    t.index ["word"], name: "index_keywords_on_word", unique: true
   end
 
   create_table "kukai_keywords", force: :cascade do |t|

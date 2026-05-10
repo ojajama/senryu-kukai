@@ -29,12 +29,18 @@
     <h3>推敲後</h3>
     <%= simple_format(h(rev.after_verse)) %>
 
-    <%= button_to "AIにコメントさせる",
+    <%= button_to rev.ai_comment.present? ? "AI講評を再表示する" : "AIにコメントさせる",
       ai_comment_post_revision_path(rev),
       method: :post,
       data: { turbo_frame: "ai_comment_#{rev.id}" } %>
 
       <%= turbo_frame_tag "ai_comment_#{rev.id}" do %>
+        <% if rev.ai_comment.present? %>
+          <div role="status" aria-live="polite" class="ai-comment">
+            <h3>AI講評</h3>
+            <%= simple_format(h(rev.ai_comment)) %>
+          </div>
+        <% end %>
       <% end %>
   </section>
 

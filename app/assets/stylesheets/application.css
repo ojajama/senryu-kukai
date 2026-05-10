@@ -382,6 +382,23 @@ ins { background: #eaffea;}
   margin-top: 8px;
 }
 
+.ai-comment {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-left: 4px solid #9dbdc5;
+  border-radius: 0 8px 8px 0;
+  background: #f6fbfb;
+}
+
+.ai-comment h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.ai-comment p {
+  margin: 0;
+}
+
 @media (max-width: 640px) {
   body {
     padding: 12px;

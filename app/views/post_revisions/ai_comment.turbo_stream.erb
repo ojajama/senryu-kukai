@@ -1,6 +1,6 @@
 <%= turbo_stream.replace "ai_comment_#{@revision.id}" do %>
   <%= turbo_frame_tag "ai_comment_#{@revision.id}" do %>
-    <div role="status" aria-live="polite" class="mt-4">
+    <div role="status" aria-live="polite" class="ai-comment">
       <h3>AI講評</h3>
       <%= simple_format(h(@comment)) %>
     </div>

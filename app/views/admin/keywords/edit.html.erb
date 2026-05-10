@@ -1,0 +1,48 @@
+<section class="auth-panel">
+  <div class="section-heading">
+    <h1>お題を編集</h1>
+  </div>
+
+  <%= form_with model: [:admin, @keyword], class: "auth-form" do |f| %>
+    <% if @keyword.errors.any? %>
+      <div class="form-errors">
+        <p>お題を保存できませんでした。</p>
+        <ul>
+          <% @keyword.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-row">
+      <%= f.label :word, "表記" %>
+      <%= f.text_field :word, autofocus: true %>
+    </div>
+
+    <div class="form-row">
+      <%= f.label :reading, "読み" %>
+      <%= f.text_field :reading %>
+    </div>
+
+    <div class="form-row">
+      <%= f.label :pos, "品詞" %>
+      <%= f.text_field :pos %>
+    </div>
+
+    <div class="form-row">
+      <%= f.label :category, "カテゴリ" %>
+      <%= f.text_field :category %>
+    </div>
+
+    <div class="form-row">
+      <%= f.label :len, "音数" %>
+      <%= f.number_field :len, min: 1 %>
+    </div>
+
+    <div class="form-actions">
+      <%= link_to "戻る", admin_keywords_path, class: "secondary-link" %>
+      <%= f.submit "更新する", class: "primary-button" %>
+    </div>
+  <% end %>
+</section>

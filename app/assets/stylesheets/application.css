@@ -221,6 +221,8 @@ ins { background: #eaffea;}
 
 .form-actions {
   display: flex;
+  align-items: center;
+  gap: 0.75rem;
   justify-content: flex-end;
 }
 
@@ -241,6 +243,10 @@ ins { background: #eaffea;}
 .secondary-button {
   color: #193f45;
   background: #edf8fa;
+}
+
+.secondary-link {
+  color: #0f5f76;
 }
 
 .danger-button {
@@ -369,6 +375,44 @@ ins { background: #eaffea;}
   border-radius: 999px;
   background: #f6fbfb;
   text-decoration: none;
+}
+
+.admin-summary {
+  display: flex;
+  margin-bottom: 12px;
+  color: #6b6258;
+}
+
+.admin-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #d8d2c8;
+  border-radius: 8px;
+  background: #fffdf9;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid #ebe5dc;
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-table th {
+  color: #6b6258;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: #f7f5f0;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: 0;
 }
 
 .auth-panel {

@@ -36,4 +36,8 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :keywords, only: [:index, :edit, :update]
+  end
+
 end

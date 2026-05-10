@@ -1,9 +1,12 @@
-<h3><%= post.keyword.word %></h3>
+<div class="post-meta-line">
+  <span class="post-keyword"><%= post.keyword.word %></span>
+  <span><%= l post.created_at, format: :short %></span>
+</div>
 
-<p><%= simple_format(h(post.verse)) %></p>
+<div class="post-verse">
+  <%= simple_format(h(post.verse)) %>
+</div>
 
-<p>
-    投稿者：
-    <%= link_to post.user.email, user_posts_path(post.user) %><br>
-    投稿日：<%= l post.created_at, format: :short %>
+<p class="post-author">
+  投稿者：<%= link_to post.user.email, user_posts_path(post.user) %>
 </p>

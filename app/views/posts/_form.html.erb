@@ -1,15 +1,15 @@
-<article id="<%= dom_id(post) if post.persisted? %>">
+<article id="<%= dom_id(post) if post.persisted? %>" class="post-form">
 
   <%= form_with model: post,
         url: post.persisted? ? post_path(post) : kukai_posts_path(kukai),
         data: { turbo: true } do |f| %>
     <div class="current-keyword">
-        <p class="form-label">お題を選ぶ</p>
+        <p class="form-label">お題</p>
 
         <div class="keyword-chips">
           <% keywords.each do |k| %>
             <label class="keyword-chip">
-              <%= f.radio_button :keyword_id, k.id %>
+              <%= f.radio_button :keyword_id, k.id, required: true %>
               <span><%= k.word %></span>
             </label>
           <% end %>
@@ -18,10 +18,13 @@
 
     <div class="form-row">
       <%= f.label :verse, "川柳" %>
-      <%= f.text_area :verse, rows: 3 %>
+      <%= f.text_area :verse,
+            rows: 3,
+            placeholder: "五・七・五のリズムでどうぞ",
+            required: true %>
     </div>
 
-    <div>
+    <div class="form-actions">
       <%= f.submit post.persisted? ? "更新する" : "投稿する", class: "primary-button" %>
     </div>
   <% end %>

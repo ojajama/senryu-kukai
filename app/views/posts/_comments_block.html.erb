@@ -1,17 +1,17 @@
   <h4>コメント</h4>
 
   <% post.comments.sort_by(&:created_at).each do |comment| %>
-    <p>
-      <%= comment.body %><br>
+    <div class="comment-item">
+      <p><%= comment.body %></p>
       <small>
         <%= comment.user.email %>・<%= l comment.created_at, format: :short %>
       </small>
-    </p>
+    </div>
   <% end %>
 
   <% if user_signed_in? %>
-    <%= form_with model: [post, Comment.new] do |f| %>
-      <%= f.text_area :body %><br>
-      <%= f.submit "コメントする" %>
+    <%= form_with model: [post, Comment.new], class: "comment-form" do |f| %>
+      <%= f.text_area :body, rows: 2, placeholder: "感想を書く" %>
+      <%= f.submit "コメントする", class: "secondary-button" %>
     <% end %>
   <% end %>

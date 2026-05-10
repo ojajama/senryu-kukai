@@ -15,17 +15,23 @@
  */
 
  body {
-   max-width: 760px;
+   max-width: 880px;
    margin: 0 auto;
    padding: 16px;
+   color: #222;
    line-height: 1.8;
    font-family: system-ui, sans-serif;
+   background: #f7f5f0;
+ }
+
+ a {
+   color: #0f5f76;
  }
 
  header {
-   border-bottom: 1px solid #ddd;
-   margin-bottom: 24px;
-   padding-bottom: 12px;
+   margin-bottom: 28px;
+   padding: 14px 0;
+   border-bottom: 1px solid #d8d2c8;
  }
 
  nav {
@@ -35,8 +41,21 @@
    align-items: center;
  }
 
+ nav button,
+ nav input[type="submit"] {
+   padding: 0;
+   border: 0;
+   color: #0f5f76;
+   background: transparent;
+   cursor: pointer;
+   text-decoration: underline;
+ }
+
+ main {
+   padding-bottom: 40px;
+ }
+
  article {
-   border-bottom: 1px solid #ddd;
    padding: 16px 0;
  }
 
@@ -44,7 +63,7 @@
  textarea,
  select,
  button {
-   font-size: 1rem;
+   font: inherit;
  }
 
  textarea {
@@ -53,64 +72,101 @@
  }
 
  .current-kukai {
-   border: 1px solid #ddd;
    padding: 16px;
    margin: 16px 0;
+   border: 1px solid #d8d2c8;
    border-radius: 8px;
-   background: #fafafa;
+   background: #fffdf9;
  }
  
 del { background: #ffecec;}
 ins { background: #eaffea;}
 
-/* 句会show.html.erbのスタイルを追加 */
-
 .kukai-title {
-  margin: 1rem 0 1.5rem;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: #fafafa;
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.35;
 }
 
 .kukai-month {
-  margin: 0 0 0.5rem;
-  font-size: 0.9rem;
-  color: #666;
+  margin: 0 0 0.35rem;
+  color: #6b6258;
+  font-size: 0.95rem;
 }
 
-.kukai-keyword-box {
+.kukai-header {
+  margin: 0 0 24px;
+  padding: 22px 0 18px;
+  border-bottom: 1px solid #d8d2c8;
+}
+
+.kukai-keywords,
+.kukai-stats,
+.post-meta-line,
+.like-row,
+.post-actions,
+.revision-links {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
-.kukai-keyword-label {
-  font-size: 0.85rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 999px;
-  background: #eee;
+.kukai-keywords {
+  margin-top: 16px;
 }
 
 .kukai-keyword {
-  font-size: 1.6rem;
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #c8b99d;
+  border-radius: 999px;
+  color: #4c3926;
+  background: #fff7e8;
+  font-weight: 700;
 }
 
-.kukai-help {
-  margin: 0.5rem 0 0;
-  font-size: 0.9rem;
-  color: #666;
+.kukai-stats {
+  margin-top: 14px;
+  color: #6b6258;
+  font-size: 0.95rem;
 }
 
 .post-form-box {
-  margin: 1.5rem 0;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+  margin: 0 0 28px;
+  padding: 18px;
+  border: 1px solid #d8d2c8;
+  border-radius: 8px;
+  background: #fffdf9;
+  box-shadow: 0 10px 24px rgba(54, 44, 34, 0.07);
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.posts-heading {
+  margin-top: 8px;
 }
 
 .current-keyword {
   font-size: 1rem;
+}
+
+.form-label {
+  margin: 0 0 0.35rem;
+  font-weight: 700;
 }
 
 .form-row {
@@ -128,14 +184,39 @@ ins { background: #eaffea;}
   box-sizing: border-box;
   font-size: 1rem;
   padding: 0.7rem;
-  border: 1px solid #bbb;
+  border: 1px solid #bdb5aa;
   border-radius: 8px;
+  background: #fff;
+}
+
+.form-row textarea:focus,
+.comment-form textarea:focus {
+  outline: 3px solid #d4edf2;
+  border-color: #177b91;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.primary-button,
+.secondary-button {
+  font-size: 1rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid #193f45;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .primary-button {
-  font-size: 1rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
+  color: #fff;
+  background: #193f45;
+}
+
+.secondary-button {
+  color: #193f45;
+  background: #edf8fa;
 }
 
 .keyword-chips {
@@ -160,12 +241,147 @@ ins { background: #eaffea;}
   display: inline-block;
   padding: 0.5rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid #bbb;
+  border: 1px solid #bdb5aa;
   background: white;
 }
 
 .keyword-chip input[type="radio"]:checked+span {
-  background: #222;
+  background: #193f45;
   color: white;
-  border-color: #222;
+  border-color: #193f45;
+}
+
+.keyword-chip input[type="radio"]:focus+span {
+  outline: 3px solid #d4edf2;
+}
+
+.signin-prompt,
+#no_posts {
+  margin: 0;
+  padding: 14px 0;
+  color: #6b6258;
+}
+
+.post-card {
+  margin: 0 0 14px;
+  padding: 18px;
+  border: 1px solid #d8d2c8;
+  border-radius: 8px;
+  background: #fffdf9;
+}
+
+.post-meta-line {
+  justify-content: space-between;
+  color: #6b6258;
+  font-size: 0.9rem;
+}
+
+.post-keyword {
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  color: #4c3926;
+  background: #fff0d0;
+  font-weight: 700;
+}
+
+.post-verse {
+  margin: 12px 0;
+  font-size: 1.35rem;
+  line-height: 1.7;
+}
+
+.post-verse p {
+  margin: 0;
+}
+
+.post-author,
+.muted-text {
+  margin: 0;
+  color: #6b6258;
+  font-size: 0.95rem;
+}
+
+.like-row {
+  margin-top: 12px;
+  justify-content: space-between;
+}
+
+.post-actions {
+  margin-top: 12px;
+}
+
+.post-actions form {
+  display: inline;
+}
+
+.post-actions input[type="submit"] {
+  padding: 0;
+  border: 0;
+  color: #9b2f2f;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.post-extra {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #ebe5dc;
+}
+
+.post-extra summary {
+  cursor: pointer;
+  color: #0f5f76;
+}
+
+.comment-item {
+  margin: 10px 0;
+  padding-left: 10px;
+  border-left: 3px solid #d8d2c8;
+}
+
+.comment-item p {
+  margin: 0 0 0.15rem;
+}
+
+.comment-item small {
+  color: #6b6258;
+}
+
+.comment-form {
+  margin-top: 12px;
+}
+
+.comment-form textarea {
+  box-sizing: border-box;
+  padding: 0.6rem;
+  border: 1px solid #bdb5aa;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.revision-links {
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 12px;
+  }
+
+  .post-form-box,
+  .post-card {
+    padding: 14px;
+  }
+
+  .form-actions,
+  .like-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+  }
 }

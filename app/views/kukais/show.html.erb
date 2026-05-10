@@ -1,20 +1,43 @@
 <section class="kukai-header">
+  <p class="kukai-month"><%= @kukai.year %>年<%= @kukai.month %>月の句会</p>
   <h1 class="kukai-title"><%= @kukai.title %></h1>
 
-  </section>
+  <% if @keywords.any? %>
+    <div class="kukai-keywords" aria-label="今回のお題">
+      <% @keywords.each do |keyword| %>
+        <span class="kukai-keyword"><%= keyword.word %></span>
+      <% end %>
+    </div>
+  <% end %>
 
-  <section class="post-form-box">
+  <div class="kukai-stats">
+    <span>投稿 <%= @posts.size %>句</span>
+    <span>お題 <%= @keywords.size %>件</span>
+  </div>
+</section>
 
-  <div id="post_form">
-    <%= render "posts/form",
-          post: Post.new,
-          kukai: @kukai,
-          keywords: @keywords %>
+<section class="post-form-box">
+  <div class="section-heading">
+    <h2>一句投稿する</h2>
   </div>
 
-  </section>
+  <% if user_signed_in? %>
+    <div id="post_form">
+      <%= render "posts/form",
+            post: Post.new,
+            kukai: @kukai,
+            keywords: @keywords %>
+    </div>
+  <% else %>
+    <p class="signin-prompt">
+      投稿するには<%= link_to "ログイン", new_user_session_path %>してください。
+    </p>
+  <% end %>
+</section>
 
-<h2>新着投稿</h2>
+<div class="section-heading posts-heading">
+  <h2>新着投稿</h2>
+</div>
 
 <div id="posts">
   <% if @posts.any? %>

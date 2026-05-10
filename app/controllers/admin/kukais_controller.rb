@@ -21,6 +21,10 @@ module Admin
       @keyword_count = 5
     end
 
+    def edit
+      @kukai = Kukai.includes(:keywords).find(params[:id])
+    end
+
     def create
       @kukai = Kukai.new(kukai_params)
       @keyword_count = params[:keyword_count].presence || 5
@@ -33,10 +37,39 @@ module Admin
       end
     end
 
+    def update
+      @kukai = Kukai.find(params[:id])
+
+      if @kukai.update(kukai_params)
+        redirect_to admin_kukais_path, notice: "句会を更新しました。"
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def add_random_keyword
+      kukai = Kukai.find(params[:id])
+      before_count = kukai.keywords.count
+      kukai.assign_one_random_keyword!
+
+      if kukai.keywords.count > before_count
+        redirect_to edit_admin_kukai_path(kukai), notice: "お題を追加しました。"
+      else
+        redirect_to edit_admin_kukai_path(kukai), alert: "追加できるお題がありません。"
+      end
+    end
+
+    def remove_keyword
+      kukai = Kukai.find(params[:id])
+      kukai.kukai_keywords.find_by!(keyword_id: params[:keyword_id]).destroy
+
+      redirect_to edit_admin_kukai_path(kukai), notice: "お題を外しました。"
+    end
+
     private
 
     def kukai_params
-      params.require(:kukai).permit(:title, :year, :month)
+      params.require(:kukai).permit(:title, :year, :month, :visible)
     end
   end
 end

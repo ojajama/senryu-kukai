@@ -1,7 +1,7 @@
 class KukaisController < ApplicationController
 
   def index
-    @kukais = Kukai.order(year: :desc, month: :desc)
+    @kukais = Kukai.visible.order(year: :desc, month: :desc)
   end
 
   def show

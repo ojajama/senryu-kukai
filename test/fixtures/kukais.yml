@@ -3,9 +3,11 @@
 one:
   year: 1
   month: 1
-  title: MyString
+  title: 表示句会
+  visible: true
 
 two:
   year: 1
   month: 1
-  title: MyString
+  title: 非表示句会
+  visible: false

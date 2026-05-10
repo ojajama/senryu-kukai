@@ -434,6 +434,12 @@ ins { background: #eaffea;}
   border-bottom: 0;
 }
 
+.table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
 .auth-panel {
   max-width: 520px;
   margin: 0 auto 36px;
@@ -514,6 +520,41 @@ ins { background: #eaffea;}
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+}
+
+.assigned-keywords {
+  margin: 18px 0;
+  padding-top: 14px;
+  border-top: 1px solid #ebe5dc;
+}
+
+.assigned-keywords h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.keyword-chips.readonly span {
+  cursor: default;
+}
+
+.keyword-chip-with-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.keyword-chip-with-action form {
+  display: inline;
+}
+
+.chip-button {
+  padding: 0;
+  border: 0;
+  color: #9b2f2f;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: underline;
 }
 
 .post-card {

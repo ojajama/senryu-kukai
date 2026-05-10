@@ -1,0 +1,71 @@
+<section class="auth-panel">
+  <div class="section-heading">
+    <h1>句会を編集</h1>
+  </div>
+
+  <%= form_with model: [:admin, @kukai], class: "auth-form" do |f| %>
+    <% if @kukai.errors.any? %>
+      <div class="form-errors">
+        <p>句会を保存できませんでした。</p>
+        <ul>
+          <% @kukai.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-row">
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title, autofocus: true %>
+    </div>
+
+    <div class="form-row two-columns">
+      <div>
+        <%= f.label :year, "年" %>
+        <%= f.number_field :year, min: 2000, max: 2100 %>
+      </div>
+      <div>
+        <%= f.label :month, "月" %>
+        <%= f.number_field :month, min: 1, max: 12 %>
+      </div>
+    </div>
+
+    <label class="checkbox-row">
+      <%= f.check_box :visible %>
+      <span>句会一覧とトップページに表示する</span>
+    </label>
+
+    <section class="assigned-keywords">
+      <div class="section-heading">
+        <h2>現在のお題</h2>
+        <%= button_to "ランダムで1つ追加",
+              add_random_keyword_admin_kukai_path(@kukai),
+              method: :post,
+              class: "secondary-button" %>
+      </div>
+
+      <% if @kukai.keywords.any? %>
+        <div class="keyword-chips readonly">
+          <% @kukai.keywords.order(:word).each do |keyword| %>
+            <span class="keyword-chip-with-action">
+              <%= keyword.word %>
+              <%= button_to "外す",
+                    keyword_admin_kukai_path(@kukai, keyword),
+                    method: :delete,
+                    data: { turbo_confirm: "このお題を句会から外しますか？" },
+                    class: "chip-button" %>
+            </span>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="muted-text">まだお題が割り当てられていません。</p>
+      <% end %>
+    </section>
+
+    <div class="form-actions">
+      <%= link_to "戻る", admin_kukais_path, class: "secondary-link" %>
+      <%= f.submit "更新する", class: "primary-button" %>
+    </div>
+  <% end %>
+</section>

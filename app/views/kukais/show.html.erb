@@ -5,7 +5,9 @@
   <% if @keywords.any? %>
     <div class="kukai-keywords" aria-label="今回のお題">
       <% @keywords.each do |keyword| %>
-        <span class="kukai-keyword"><%= keyword.word %></span>
+        <%= link_to keyword.word,
+              kukai_keyword_path(@kukai, keyword),
+              class: "kukai-keyword" %>
       <% end %>
     </div>
   <% end %>

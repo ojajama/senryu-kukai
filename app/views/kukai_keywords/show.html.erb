@@ -1,13 +1,26 @@
-<h1><%= @kukai.title %></h1>
+<section class="kukai-header">
+  <p class="kukai-month"><%= @kukai.year %>年<%= @kukai.month %>月の句会</p>
+  <h1 class="kukai-title"><%= @kukai.title %></h1>
 
-<h2>お題:<%= @keyword.word %></h2>
+  <div class="kukai-keywords">
+    <span class="kukai-keyword current"><%= @keyword.word %></span>
+  </div>
 
-<p><%=link_to "句会に戻る", kukai_path(@kukai) %></p>
+  <div class="kukai-stats">
+    <span>投稿 <%= @posts.size %>句</span>
+  </div>
+</section>
 
-<h3>投稿一覧</h3>
+<p class="back-link"><%= link_to "句会に戻る", kukai_path(@kukai) %></p>
 
+<div class="section-heading posts-heading">
+  <h2>お題別投稿</h2>
+</div>
+
+<div id="posts">
   <% if @posts.any? %>
     <%= render @posts %>
   <% else %>
-    <p>まだ投稿がありません。</p>
+    <p id="no_posts">まだ投稿がありません。</p>
   <% end %>
+</div>

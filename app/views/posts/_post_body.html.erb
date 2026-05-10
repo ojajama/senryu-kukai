@@ -8,5 +8,5 @@
 </div>
 
 <p class="post-author">
-  投稿者：<%= link_to post.user.email, user_posts_path(post.user) %>
+  投稿者：<%= link_to post.user.display_name, user_posts_path(post.user) %>
 </p>

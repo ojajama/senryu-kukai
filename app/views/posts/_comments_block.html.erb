@@ -4,7 +4,7 @@
     <div class="comment-item">
       <p><%= comment.body %></p>
       <small>
-        <%= comment.user.email %>・<%= l comment.created_at, format: :short %>
+        <%= comment.user.display_name %>・<%= l comment.created_at, format: :short %>
       </small>
     </div>
   <% end %>

@@ -12,6 +12,12 @@
     </div>
 
     <div class="form-row">
+      <%= f.label :nickname, "ニックネーム" %>
+      <p class="form-hint">投稿者名として表示されます。あとから変更できます。</p>
+      <%= f.text_field :nickname, autocomplete: "nickname" %>
+    </div>
+
+    <div class="form-row">
       <%= f.label :password, "パスワード" %>
       <% if @minimum_password_length %>
         <p class="form-hint"><%= @minimum_password_length %>文字以上で入力してください。</p>

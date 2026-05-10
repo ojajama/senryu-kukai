@@ -5,8 +5,8 @@
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f| %>
     <div class="form-row">
-      <%= f.label :email, "メールアドレス" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.label :login, "メールアドレスまたはニックネーム" %>
+      <%= f.text_field :login, autofocus: true, autocomplete: "username" %>
     </div>
 
     <div class="form-row">

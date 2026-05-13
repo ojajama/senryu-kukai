@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "user_posts/index"
   get "kukai_keywords/show"
   get "posts/create"
+  get "up" => "rails/health#show", as: :rails_health_check
   root to: "home#index"
 
   devise_for :users

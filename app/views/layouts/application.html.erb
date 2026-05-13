@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SenryuKukai</title>
+    <title>川柳句会</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#193f45">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="川柳句会">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -12,25 +21,32 @@
 
   <body>
     <header>
-      <nav>
-        <%= link_to "ホーム", root_path %>
-        <%= link_to "句会一覧", kukais_path %>
-        <%= link_to "お題一覧", keywords_path %>
-        <%= link_to "参加者一覧", users_path %>
+      <div class="site-nav">
+        <%= link_to "川柳句会", root_path, class: "site-brand" %>
 
-        <% if user_signed_in? %>
-          <span>ログイン中：<%= current_user.display_name %></span>
-          <%= link_to "アカウント設定", edit_user_registration_path %>
-          <% if current_user.admin? %>
-            <%= link_to "お題管理", admin_keywords_path %>
-            <%= link_to "句会管理", admin_kukais_path %>
-          <% end %>
-          <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to "新規登録", new_user_registration_path %>
-          <%= link_to "ログイン", new_user_session_path %>
-        <% end %>
-      </nav>
+        <details class="nav-menu">
+          <summary>メニュー</summary>
+          <nav>
+            <%= link_to "ホーム", root_path %>
+            <%= link_to "句会一覧", kukais_path %>
+            <%= link_to "お題一覧", keywords_path %>
+            <%= link_to "参加者一覧", users_path %>
+
+            <% if user_signed_in? %>
+              <span class="nav-user">ログイン中：<%= current_user.display_name %></span>
+              <%= link_to "アカウント設定", edit_user_registration_path %>
+              <% if current_user.admin? %>
+                <%= link_to "お題管理", admin_keywords_path %>
+                <%= link_to "句会管理", admin_kukais_path %>
+              <% end %>
+              <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <% else %>
+              <%= link_to "新規登録", new_user_registration_path %>
+              <%= link_to "ログイン", new_user_session_path %>
+            <% end %>
+          </nav>
+        </details>
+      </div>
     </header>
 
     <div id="flash_message" role="status" aria-live="polite">

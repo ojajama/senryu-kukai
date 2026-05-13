@@ -204,7 +204,8 @@ ins { background: #eaffea;}
 .form-row input[type="email"],
 .form-row input[type="password"],
 .form-row input[type="text"],
-.form-row input[type="number"] {
+.form-row input[type="number"],
+.form-row input[type="search"] {
   width: 100%;
   box-sizing: border-box;
   padding: 0.55rem 0.65rem;
@@ -557,6 +558,33 @@ ins { background: #eaffea;}
   text-decoration: underline;
 }
 
+.keyword-candidate-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.keyword-candidate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #ebe5dc;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.keyword-candidate strong,
+.keyword-candidate span {
+  display: block;
+}
+
+.keyword-candidate span {
+  color: #6b6258;
+  font-size: 0.9rem;
+}
+
 .post-card {
   margin: 0 0 14px;
   padding: 18px;
@@ -687,7 +715,8 @@ ins { background: #eaffea;}
   }
 
   .form-actions,
-  .like-row {
+  .like-row,
+  .keyword-candidate {
     align-items: stretch;
     flex-direction: column;
   }

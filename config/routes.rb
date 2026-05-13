@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     resources :kukais, only: [:index, :new, :create, :edit, :update] do
       member do
         post :add_random_keyword
+        post :add_keyword
         delete "keywords/:keyword_id", action: :remove_keyword, as: :keyword
       end
     end

@@ -53,6 +53,15 @@ class AdminKukaisControllerTest < ActionDispatch::IntegrationTest
     assert_includes response.body, keywords(:one).word
   end
 
+  test "admin should search available keywords on edit" do
+    sign_in users(:one)
+
+    get edit_admin_kukai_url(kukais(:one)), params: { keyword_q: keywords(:two).word }
+
+    assert_response :success
+    assert_includes response.body, keywords(:two).word
+  end
+
   test "admin should update kukai" do
     sign_in users(:one)
 
@@ -81,6 +90,17 @@ class AdminKukaisControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to edit_admin_kukai_url(kukais(:one))
+  end
+
+  test "admin should add selected keyword" do
+    sign_in users(:one)
+
+    assert_difference("KukaiKeyword.count", 1) do
+      post add_keyword_admin_kukai_url(kukais(:one)), params: { keyword_id: keywords(:two).id }
+    end
+
+    assert_redirected_to edit_admin_kukai_url(kukais(:one))
+    assert_includes kukais(:one).keywords.reload, keywords(:two)
   end
 
   test "admin should remove keyword" do

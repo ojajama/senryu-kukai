@@ -23,6 +23,7 @@ module Admin
 
     def edit
       @kukai = Kukai.includes(:keywords).find(params[:id])
+      set_keyword_candidates
     end
 
     def create
@@ -59,6 +60,14 @@ module Admin
       end
     end
 
+    def add_keyword
+      kukai = Kukai.find(params[:id])
+      keyword = Keyword.find(params[:keyword_id])
+      kukai.kukai_keywords.find_or_create_by!(keyword: keyword)
+
+      redirect_to edit_admin_kukai_path(kukai), notice: "お題を追加しました。"
+    end
+
     def remove_keyword
       kukai = Kukai.find(params[:id])
       kukai.kukai_keywords.find_by!(keyword_id: params[:keyword_id]).destroy
@@ -70,6 +79,19 @@ module Admin
 
     def kukai_params
       params.require(:kukai).permit(:title, :year, :month, :visible)
+    end
+
+    def set_keyword_candidates
+      @keyword_query = params[:keyword_q].to_s.strip
+      @keyword_candidates = Keyword.where.not(id: @kukai.keyword_ids).order(:word).limit(20)
+
+      return if @keyword_query.blank?
+
+      like_query = "%#{ActiveRecord::Base.sanitize_sql_like(@keyword_query)}%"
+      @keyword_candidates = @keyword_candidates.where(
+        "word ILIKE :query OR reading ILIKE :query OR category ILIKE :query",
+        query: like_query
+      )
     end
   end
 end

@@ -68,4 +68,41 @@
       <p class="muted-text">まだお題が割り当てられていません。</p>
     <% end %>
   </section>
+
+  <section class="assigned-keywords">
+    <div class="section-heading">
+      <h2>お題を検索して追加</h2>
+    </div>
+
+    <%= form_with url: edit_admin_kukai_path(@kukai), method: :get, class: "auth-form" do %>
+      <div class="form-row">
+        <%= label_tag :keyword_q, "お題検索" %>
+        <%= search_field_tag :keyword_q, @keyword_query, placeholder: "語句・読み・カテゴリで検索" %>
+      </div>
+
+      <div class="form-actions">
+        <%= submit_tag "検索する", class: "secondary-button" %>
+      </div>
+    <% end %>
+
+    <% if @keyword_candidates.any? %>
+      <div class="keyword-candidate-list">
+        <% @keyword_candidates.each do |keyword| %>
+          <div class="keyword-candidate">
+            <div>
+              <strong><%= keyword.word %></strong>
+              <span><%= [keyword.reading, keyword.pos, keyword.category].compact_blank.join(" / ") %></span>
+            </div>
+            <%= button_to "追加",
+                  add_keyword_admin_kukai_path(@kukai),
+                  params: { keyword_id: keyword.id },
+                  method: :post,
+                  class: "secondary-button" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="muted-text">追加できるお題が見つかりません。</p>
+    <% end %>
+  </section>
 </section>

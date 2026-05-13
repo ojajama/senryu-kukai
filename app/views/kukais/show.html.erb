@@ -3,6 +3,7 @@
   <h1 class="kukai-title"><%= @kukai.title %></h1>
 
   <% if @keywords.any? %>
+    <h2 class="keyword-group-heading">今回のお題</h2>
     <div class="kukai-keywords" aria-label="今回のお題">
       <% @keywords.each do |keyword| %>
         <%= link_to keyword.word,

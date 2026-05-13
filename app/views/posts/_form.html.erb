@@ -3,8 +3,8 @@
   <%= form_with model: post,
         url: post.persisted? ? post_path(post) : kukai_posts_path(kukai),
         data: { turbo: true } do |f| %>
-    <div class="current-keyword">
-        <p class="form-label">お題</p>
+    <fieldset class="current-keyword">
+        <legend class="form-label">投稿するお題を選ぶ</legend>
 
         <div class="keyword-chips">
           <% keywords.each do |k| %>
@@ -14,7 +14,7 @@
             </label>
           <% end %>
         </div>
-    </div>
+    </fieldset>
 
     <div class="form-row">
       <%= f.label :verse, "川柳" %>

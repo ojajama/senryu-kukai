@@ -113,7 +113,13 @@ ins { background: #eaffea;}
 }
 
 .kukai-keywords {
-  margin-top: 16px;
+  margin-top: 8px;
+}
+
+.keyword-group-heading {
+  margin: 16px 0 0;
+  color: #6b6258;
+  font-size: 0.95rem;
 }
 
 .kukai-keyword {
@@ -173,6 +179,12 @@ ins { background: #eaffea;}
 
 .current-keyword {
   font-size: 1rem;
+}
+
+fieldset.current-keyword {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 .form-label {

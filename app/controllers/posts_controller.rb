@@ -16,9 +16,11 @@ class PostsController < ApplicationController
       end
       
     else
+      @post_error_message = post_error_message(@post)
+
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to kukai_path(@kukai), alert: "投稿できませんでした。" }
+        format.html { redirect_to kukai_path(@kukai), alert: @post_error_message }
       end
     end
   end
@@ -72,5 +74,12 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:verse, :keyword_id)
+  end
+
+  def post_error_message(post)
+    return "お題を選んでください。" if post.errors[:keyword].any?
+    return "川柳を入力してください。" if post.errors[:verse].any?
+
+    "投稿できませんでした。"
   end
 end

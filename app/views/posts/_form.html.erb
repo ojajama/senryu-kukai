@@ -9,7 +9,7 @@
         <div class="keyword-chips">
           <% keywords.each do |k| %>
             <label class="keyword-chip">
-              <%= f.radio_button :keyword_id, k.id, required: true %>
+              <%= f.radio_button :keyword_id, k.id %>
               <span><%= k.word %></span>
             </label>
           <% end %>
@@ -20,8 +20,7 @@
       <%= f.label :verse, "川柳" %>
       <%= f.text_area :verse,
             rows: 3,
-            placeholder: "五・七・五のリズムでどうぞ",
-            required: true %>
+            placeholder: "五・七・五のリズムでどうぞ" %>
     </div>
 
     <div class="form-actions">

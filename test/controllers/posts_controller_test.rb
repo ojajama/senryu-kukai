@@ -31,6 +31,39 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/#{Regexp.escape(keywords(:two).word)}/, response.body)
   end
 
+  test "turbo create without keyword re-renders form without adding a post" do
+    sign_in users(:one)
+
+    assert_no_difference("Post.count") do
+      post kukai_posts_url(kukais(:one), format: :turbo_stream), params: {
+        post: {
+          verse: "お題なし"
+        }
+      }
+    end
+
+    assert_response :success
+    assert_includes response.body, "お題を選んでください。"
+    assert_no_match(/turbo-stream action="prepend" target="posts"/, response.body)
+  end
+
+  test "turbo create without verse asks for verse" do
+    sign_in users(:one)
+
+    assert_no_difference("Post.count") do
+      post kukai_posts_url(kukais(:one), format: :turbo_stream), params: {
+        post: {
+          keyword_id: keywords(:one).id,
+          verse: ""
+        }
+      }
+    end
+
+    assert_response :success
+    assert_includes response.body, "川柳を入力してください。"
+    assert_no_match(/turbo-stream action="prepend" target="posts"/, response.body)
+  end
+
   test "should redirect create when signed out" do
     assert_no_difference("Post.count") do
       post kukai_posts_url(kukais(:one)), params: {

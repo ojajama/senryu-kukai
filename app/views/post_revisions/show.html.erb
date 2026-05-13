@@ -25,10 +25,15 @@
 <section>
   <h3>差分</h3>
 
-  <%= raw Diffy::Diff.new(
-        @revision.before_verse.to_s,
-        @revision.after_verse.to_s
-      ).to_s(:html) %>
+  <div aria-hidden="true">
+    <%= raw Diffy::Diff.new(
+          @revision.before_verse.to_s,
+          @revision.after_verse.to_s
+        ).to_s(:html) %>
+  </div>
+  <p class="sr-only">
+    差分の装飾表示です。読み上げでは、上の推敲前と推敲後の本文を確認してください。
+  </p>
 </section>
 
     <%= button_to @revision.ai_comment.present? ? "AI講評を再表示する" : "AIにコメントさせる",

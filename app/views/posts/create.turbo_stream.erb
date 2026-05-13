@@ -1,10 +1,15 @@
-<%= turbo_stream.remove "no_posts" %>
-<%= turbo_stream.prepend "posts",
-      partial: "posts/post",
-      locals: { post: @post } %>
+<% if @post.persisted? %>
+  <%= turbo_stream.remove "no_posts" %>
+  <%= turbo_stream.prepend "posts",
+        partial: "posts/post",
+        locals: { post: @post } %>
+<% end %>
       
 <%= turbo_stream.replace "post_form" do %>
   <div id="post_form">
+    <% unless @post.persisted? %>
+      <p class="form-errors compact" role="alert"><%= @post_error_message %></p>
+    <% end %>
     <%= render "posts/form",
           post: @post.persisted? ? Post.new : @post,
           kukai: @kukai,
@@ -16,8 +21,6 @@
   <div id="flash_message" role="status" aria-live="polite">
     <% if @post.persisted? %>
       <p>投稿しました。</p>
-    <% else %>
-      <p>投稿できませんでした。</p>
     <% end %>
   </div>
 <% end %>

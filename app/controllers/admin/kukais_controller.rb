@@ -10,6 +10,7 @@ module Admin
                   )
                   .group("kukais.id")
                   .order(year: :desc, month: :desc)
+      @no_active_kukai = Kukai.where(status: [:posting, :selecting]).none?
     end
 
     def new

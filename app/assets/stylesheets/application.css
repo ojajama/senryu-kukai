@@ -909,6 +909,26 @@ fieldset.current-keyword {
   }
 }
 
+/* admin alert */
+.admin-alert {
+  background: #fff8e6;
+  border: 1px solid #e8c84a;
+  border-left: 4px solid #c8a000;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.admin-alert-title {
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.admin-alert p {
+  margin: 0 0 12px;
+  color: #5a4a00;
+}
+
 /* senku (selection) */
 .selection-banner {
   background: #f0ede8;

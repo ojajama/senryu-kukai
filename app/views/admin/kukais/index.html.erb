@@ -4,6 +4,14 @@
   <p>月ごとの句会と、お題数・投稿数を確認できます。</p>
 </section>
 
+<% if @no_active_kukai %>
+  <div class="admin-alert" role="alert">
+    <p class="admin-alert-title">進行中の句会がありません</p>
+    <p>次の句会を作成してください。</p>
+    <%= link_to "新しい句会を作成", new_admin_kukai_path, class: "primary-link-button" %>
+  </div>
+<% end %>
+
 <div class="admin-summary with-actions">
   <span>登録済み句会 <%= @kukais.length %>回</span>
   <%= link_to "新しい句会を作成", new_admin_kukai_path, class: "primary-link-button" %>

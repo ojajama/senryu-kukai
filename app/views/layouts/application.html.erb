@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>川柳句会</title>
+    <title><%= content_for?(:title) ? "#{yield(:title)} - 川柳句会" : "川柳句会" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#193f45">
     <meta name="mobile-web-app-capable" content="yes">
@@ -58,6 +58,13 @@
           <p><%= alert %></p>
         <% end %>
     </div>
+
+    <div id="page-announcer"
+         role="status"
+         aria-live="polite"
+         aria-atomic="true"
+         class="sr-only"
+         data-controller="page-announcer"></div>
 
     <main>
       <%= yield %>

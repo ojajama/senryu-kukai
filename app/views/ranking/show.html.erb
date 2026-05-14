@@ -1,0 +1,39 @@
+<% content_for :title, "#{@year}年いいねランキング" %>
+
+<h1><%= @year %>年 いいねランキング</h1>
+
+<nav class="year-nav" aria-label="年を選ぶ">
+  <% @available_years.each do |y| %>
+    <%= link_to "#{y}年", ranking_path(y),
+          class: "year-nav-item #{"year-nav-item--current" if y == @year}",
+          aria: { current: y == @year ? "page" : false } %>
+  <% end %>
+</nav>
+
+<% if @ranked_posts.any? %>
+  <%
+    current_rank = 1
+    ranks = @ranked_posts.each_with_index.map do |post, i|
+      current_rank = i + 1 if i > 0 && @ranked_posts[i - 1].likes_count != post.likes_count
+      current_rank
+    end
+  %>
+  <ol class="ranking-list">
+    <% @ranked_posts.each_with_index do |post, i| %>
+      <li class="ranking-item">
+        <span class="ranking-rank" aria-label="<%= ranks[i] %>位">
+          <%= ranks[i] %>位
+        </span>
+        <span class="ranking-verse"><%= post.verse %></span>
+        <span class="ranking-meta">
+          <%= post.user.display_name %>&nbsp;／&nbsp;<%= post.keyword.word %>&nbsp;／&nbsp;<%= link_to "#{post.kukai.month}月の句会", kukai_path(post.kukai) %>
+        </span>
+        <span class="ranking-likes" aria-label="いいね#{post.likes_count}件">
+          ♥ <%= post.likes_count %>
+        </span>
+      </li>
+    <% end %>
+  </ol>
+<% else %>
+  <p><%= @year %>年の投稿はまだありません。</p>
+<% end %>

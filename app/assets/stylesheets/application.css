@@ -878,6 +878,29 @@ fieldset.current-keyword {
   }
 }
 
+/* year ranking */
+.year-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.year-nav-item {
+  padding: 4px 12px;
+  border: 1px solid #d8d2c8;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: #0f5f76;
+}
+
+.year-nav-item--current {
+  background: #193f45;
+  border-color: #193f45;
+  color: #fff;
+}
+
 /* ranking */
 .ranking-link {
   font-size: 0.85rem;

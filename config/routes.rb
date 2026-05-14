@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get "/ranking(/:year)", to: "ranking#show", as: :ranking, constraints: { year: /\d{4}/ }
+
   resources :keywords, only: [:index]
   resources :kukais, only: [:index, :show] do
     member do

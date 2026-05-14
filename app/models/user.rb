@@ -12,7 +12,9 @@ class User < ApplicationRecord
   has_many :selections, dependent: :destroy
 
   AI_COMMENT_STYLES = %w[gentle normal strict].freeze
+  AI_COMMENT_MODELS = %w[openai claude].freeze
   validates :ai_comment_style, inclusion: { in: AI_COMMENT_STYLES }
+  validates :ai_comment_model, inclusion: { in: AI_COMMENT_MODELS }
 
   validates :nickname, presence: true,
                        length: { maximum: 30 },

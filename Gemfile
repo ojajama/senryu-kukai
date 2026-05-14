@@ -81,6 +81,7 @@ gem "devise-i18n", "~> 1.16"
 gem "diffy"
 
 gem "ruby-openai"
+gem "anthropic"
 
 gem "dotenv-rails"
 

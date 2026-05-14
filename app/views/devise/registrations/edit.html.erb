@@ -36,6 +36,21 @@
     </div>
 
     <div class="form-row">
+      <%= f.label :ai_comment_model, "AI講評のモデル" %>
+      <p class="form-hint">どちらのAIに講評させるか選べます。</p>
+      <div class="radio-group">
+        <label class="radio-label">
+          <%= f.radio_button :ai_comment_model, "openai" %>
+          OpenAI (GPT-4o mini)
+        </label>
+        <label class="radio-label">
+          <%= f.radio_button :ai_comment_model, "claude" %>
+          Claude (Anthropic)
+        </label>
+      </div>
+    </div>
+
+    <div class="form-row">
       <%= f.label :ai_comment_style, "AI講評のスタイル" %>
       <p class="form-hint">推敲差分へのAI講評の口調を選べます。</p>
       <div class="radio-group">

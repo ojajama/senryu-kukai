@@ -65,40 +65,59 @@ class PostRevisionsController < ApplicationController
   }.freeze
 
   def generate_ai_comment(revision)
-    raise "OPENAI_API_KEY is not set" if ENV["OPENAI_API_KEY"].blank?
-
     style = current_user.ai_comment_style.presence_in(AI_COMMENT_PROMPTS.keys) || "gentle"
     prompt = AI_COMMENT_PROMPTS[style]
+    user_text = <<~TEXT
+      次の川柳の推敲差分に、短く講評してください。
+
+      推敲前：
+      #{revision.before_verse}
+
+      推敲後：
+      #{revision.after_verse}
+
+      見るポイント：
+      ・どこが良くなったか
+      ・惜しいところがあれば一つだけ
+      ・#{prompt[:tone]}
+    TEXT
+
+    case current_user.ai_comment_model
+    when "claude"
+      generate_with_claude(prompt[:system], user_text)
+    else
+      generate_with_openai(prompt[:system], user_text)
+    end
+  end
+
+  def generate_with_openai(system_text, user_text)
+    raise "OPENAI_API_KEY is not set" if ENV["OPENAI_API_KEY"].blank?
 
     client = OpenAI::Client.new(access_token: ENV["OPENAI_API_KEY"])
-
     response = client.chat(
       parameters: {
         model: "gpt-4o-mini",
         messages: [
-          { role: "system", content: prompt[:system] },
-          {
-            role: "user",
-            content: <<~TEXT
-              次の川柳の推敲差分に、短く講評してください。
-
-              推敲前：
-              #{revision.before_verse}
-
-              推敲後：
-              #{revision.after_verse}
-
-              見るポイント：
-              ・どこが良くなったか
-              ・惜しいところがあれば一つだけ
-              ・#{prompt[:tone]}
-            TEXT
-          }
+          { role: "system", content: system_text },
+          { role: "user",   content: user_text }
         ]
       }
     )
-
     response.dig("choices", 0, "message", "content").to_s.strip.presence ||
+      "講評を生成できませんでした。"
+  end
+
+  def generate_with_claude(system_text, user_text)
+    raise "ANTHROPIC_API_KEY is not set" if ENV["ANTHROPIC_API_KEY"].blank?
+
+    client = Anthropic::Client.new(api_key: ENV["ANTHROPIC_API_KEY"])
+    response = client.messages.create(
+      model: "claude-haiku-4-5-20251001",
+      max_tokens: 512,
+      system: system_text,
+      messages: [{ role: "user", content: user_text }]
+    )
+    response.content.first&.text.to_s.strip.presence ||
       "講評を生成できませんでした。"
   end
 end

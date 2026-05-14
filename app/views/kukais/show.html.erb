@@ -4,17 +4,6 @@
   <p class="kukai-month"><%= @kukai.year %>年<%= @kukai.month %>月の句会</p>
   <h1 class="kukai-title"><%= @kukai.title %></h1>
 
-  <% if @keywords.any? %>
-    <h2 class="keyword-group-heading">今回のお題</h2>
-    <div class="kukai-keywords" aria-label="今回のお題">
-      <% @keywords.each do |keyword| %>
-        <%= link_to keyword.word,
-              kukai_keyword_path(@kukai, keyword),
-              class: "kukai-keyword" %>
-      <% end %>
-    </div>
-  <% end %>
-
   <div class="kukai-stats">
     <span>投稿 <%= @posts.size %>句</span>
     <span>お題 <%= @keywords.size %>件</span>

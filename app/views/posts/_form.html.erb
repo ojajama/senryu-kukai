@@ -8,14 +8,20 @@
         url: post.persisted? ? post_path(post) : kukai_posts_path(kukai),
         data: { turbo: true } do |f| %>
     <fieldset class="current-keyword">
-        <legend class="form-label">投稿するお題を選ぶ</legend>
+        <legend class="form-label">お題を選ぶ</legend>
 
         <div class="keyword-chips">
           <% keywords.each do |k| %>
-            <label class="keyword-chip">
-              <%= f.radio_button :keyword_id, k.id %>
-              <span><%= k.word %></span>
-            </label>
+            <div class="keyword-chip-group">
+              <label class="keyword-chip">
+                <%= f.radio_button :keyword_id, k.id %>
+                <span><%= k.word %></span>
+              </label>
+              <%= link_to "詳細",
+                    kukai_keyword_path(kukai, k),
+                    class: "keyword-chip-detail",
+                    aria: { label: "「#{k.word}」の詳細を見る" } %>
+            </div>
           <% end %>
         </div>
     </fieldset>

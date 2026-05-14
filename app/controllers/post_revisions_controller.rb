@@ -49,21 +49,34 @@ class PostRevisionsController < ApplicationController
     @revision = PostRevision.find(params[:id])
   end
 
+  AI_COMMENT_PROMPTS = {
+    "gentle" => {
+      system: "あなたは川柳の優しい選者です。",
+      tone:   "やさしい口調で短く、励ましを忘れずに"
+    },
+    "normal" => {
+      system: "あなたは川柳の選者です。",
+      tone:   "客観的に、簡潔に"
+    },
+    "strict" => {
+      system: "あなたは川柳の厳格な選者です。率直に批評してください。",
+      tone:   "率直に、容赦なく、改善点を具体的に"
+    }
+  }.freeze
+
   def generate_ai_comment(revision)
     raise "OPENAI_API_KEY is not set" if ENV["OPENAI_API_KEY"].blank?
 
-    client = OpenAI::Client.new(
-      access_token: ENV["OPENAI_API_KEY"]
-    )
+    style = current_user.ai_comment_style.presence_in(AI_COMMENT_PROMPTS.keys) || "gentle"
+    prompt = AI_COMMENT_PROMPTS[style]
+
+    client = OpenAI::Client.new(access_token: ENV["OPENAI_API_KEY"])
 
     response = client.chat(
       parameters: {
         model: "gpt-4o-mini",
         messages: [
-          {
-            role: "system",
-            content: "あなたは川柳の優しい選者です。"
-          },
+          { role: "system", content: prompt[:system] },
           {
             role: "user",
             content: <<~TEXT
@@ -78,7 +91,7 @@ class PostRevisionsController < ApplicationController
               見るポイント：
               ・どこが良くなったか
               ・惜しいところがあれば一つだけ
-              ・やさしい口調で短く
+              ・#{prompt[:tone]}
             TEXT
           }
         ]

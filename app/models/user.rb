@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :selections, dependent: :destroy
 
+  AI_COMMENT_STYLES = %w[gentle normal strict].freeze
+  validates :ai_comment_style, inclusion: { in: AI_COMMENT_STYLES }
+
   validates :nickname, presence: true,
                        length: { maximum: 30 },
                        uniqueness: { case_sensitive: false }

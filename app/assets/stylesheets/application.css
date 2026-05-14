@@ -565,6 +565,20 @@ fieldset.current-keyword {
   font-size: 0.92rem;
 }
 
+.radio-group {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
 .checkbox-row {
   display: inline-flex;
   align-items: center;

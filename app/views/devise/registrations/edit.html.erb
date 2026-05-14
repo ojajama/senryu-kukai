@@ -36,6 +36,19 @@
     </div>
 
     <div class="form-row">
+      <%= f.label :ai_comment_style, "AI講評のスタイル" %>
+      <p class="form-hint">推敲差分へのAI講評の口調を選べます。</p>
+      <div class="radio-group">
+        <% [["gentle", "やさしく"], ["normal", "ふつう"], ["strict", "きびしく"]].each do |value, label| %>
+          <label class="radio-label">
+            <%= f.radio_button :ai_comment_style, value %>
+            <%= label %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-row">
       <%= f.label :current_password, "現在のパスワード" %>
       <p class="form-hint">変更を保存するために現在のパスワードを入力してください。</p>
       <%= f.password_field :current_password, autocomplete: "current-password" %>

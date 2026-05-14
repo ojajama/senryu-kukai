@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
     resources :keywords, only: [:show], controller: "kukai_keywords"
     resources :posts, only: [:create]
+    resources :selections, only: [:create, :destroy]
   end
 
   resources :users, only: [:index] do
@@ -38,6 +39,8 @@ Rails.application.routes.draw do
       member do
         post :add_random_keyword
         post :add_keyword
+        post :start_selection
+        post :reveal
         delete "keywords/:keyword_id", action: :remove_keyword, as: :keyword
       end
     end

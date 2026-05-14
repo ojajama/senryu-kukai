@@ -2,6 +2,9 @@ class Kukai < ApplicationRecord
   has_many :kukai_keywords, dependent: :destroy
   has_many :keywords, through: :kukai_keywords
   has_many :posts, dependent: :destroy
+  has_many :selections, dependent: :destroy
+
+  enum :status, { posting: 0, selecting: 1, revealed: 2 }
 
   validates :title, presence: true
   validates :year, presence: true, numericality: { only_integer: true }

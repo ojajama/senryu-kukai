@@ -33,6 +33,24 @@
             </div>
           </td>
           <td><%= kukai.visible? ? "表示" : "非表示" %></td>
+          <td>
+            <div class="status-actions">
+              <span class="kukai-status kukai-status--<%= kukai.status %>">
+                <%= { "posting" => "投稿中", "selecting" => "選句中", "revealed" => "発表済" }[kukai.status] %>
+              </span>
+              <% if kukai.posting? %>
+                <%= button_to "選句開始",
+                      start_selection_admin_kukai_path(kukai),
+                      class: "secondary-button status-button",
+                      data: { turbo_confirm: "「#{kukai.title}」の選句期間を開始します。新規投稿を締め切り、作者が伏せられます。よろしいですか？" } %>
+              <% elsif kukai.selecting? %>
+                <%= button_to "結果発表",
+                      reveal_admin_kukai_path(kukai),
+                      class: "primary-button status-button",
+                      data: { turbo_confirm: "「#{kukai.title}」の選句結果を発表します。作者が公開されます。よろしいですか？" } %>
+              <% end %>
+            </div>
+          </td>
           <td><%= kukai.keywords_count %>件</td>
           <td><%= kukai.posts_count %>句</td>
         </tr>

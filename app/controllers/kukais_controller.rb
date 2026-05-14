@@ -8,8 +8,12 @@ class KukaisController < ApplicationController
     @kukai = Kukai.find(params[:id])
     @keywords = @kukai.keywords
     @posts = @kukai.posts
-                   .includes(:user, :keyword, :likes, comments: :user)
+                   .includes(:user, :keyword, :likes, :selections, comments: :user)
                    .order(created_at: :desc)
+    if user_signed_in?
+      @my_selections = current_user.selections.where(kukai: @kukai).index_by(&:post_id)
+      @my_selection_count = @my_selections.size
+    end
   end
 
   def ranking

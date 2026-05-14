@@ -1,0 +1,32 @@
+<% if kukai.selecting? %>
+  <% if user_signed_in? && post.user_id != current_user.id %>
+    <% existing = my_selections[post.id] %>
+    <div class="selection-row">
+      <% if existing %>
+        <%= button_to "選択済み ✓",
+              kukai_selection_path(kukai, existing),
+              method: :delete,
+              class: "selection-button selection-button--selected",
+              aria: { label: "#{post.verse}の選句を取り消す" },
+              data: { turbo_stream: true } %>
+      <% else %>
+        <%= button_to "この句を選ぶ",
+              kukai_selections_path(kukai),
+              params: { post_id: post.id },
+              class: "selection-button",
+              aria: { label: "#{post.verse}を選ぶ" },
+              data: { turbo_stream: true } %>
+      <% end %>
+    </div>
+  <% end %>
+<% elsif kukai.revealed? %>
+  <% count = post.selections.size %>
+  <% if count > 0 %>
+    <div class="selection-result">
+      <span class="selection-result-count">♦ <%= count %>票</span>
+      <span class="selection-result-names">
+        <%= post.selections.map { |s| s.user.display_name }.join("・") %>
+      </span>
+    </div>
+  <% end %>
+<% end %>

@@ -1,6 +1,16 @@
+<% kukai = local_assigns.fetch(:kukai, nil)
+   my_selections = local_assigns.fetch(:my_selections, {}) %>
+
 <article id="<%= dom_id(post) %>" class="post-card" tabindex="-1">
 
-<%= render "posts/post_body", post: post %>
+<%= render "posts/post_body", post: post, kukai: kukai %>
+
+<% if kukai&.selecting? || kukai&.revealed? %>
+  <div id="<%= dom_id(post, :selection) %>">
+    <%= render "posts/selection_button", post: post, kukai: kukai,
+          my_selections: my_selections %>
+  </div>
+<% end %>
 
 <%= render "posts/like_button", post: post %>
 

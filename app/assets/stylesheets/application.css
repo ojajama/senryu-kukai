@@ -878,6 +878,106 @@ fieldset.current-keyword {
   }
 }
 
+/* senku (selection) */
+.selection-banner {
+  background: #f0ede8;
+  border: 1px solid #d8d2c8;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.selection-banner--revealed {
+  background: #eaf0ed;
+  border-color: #b0c8b8;
+}
+
+.selection-banner-title {
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.selection-count {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #193f45;
+  margin: 0 0 4px;
+}
+
+.selection-hint {
+  font-size: 0.85rem;
+  color: #8a7f74;
+  margin: 0;
+}
+
+.selection-row {
+  margin: 6px 0 4px;
+}
+
+.selection-button {
+  padding: 5px 14px;
+  font-size: 0.85rem;
+  border: 1px solid #193f45;
+  border-radius: 4px;
+  background: #fff;
+  color: #193f45;
+  cursor: pointer;
+}
+
+.selection-button--selected {
+  background: #193f45;
+  color: #fff;
+}
+
+.selection-result {
+  font-size: 0.85rem;
+  margin: 6px 0 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.selection-result-count {
+  font-weight: 700;
+  color: #193f45;
+}
+
+.selection-result-names {
+  color: #8a7f74;
+}
+
+.kukai-status {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: #e8e4de;
+  color: #555;
+  white-space: nowrap;
+}
+
+.kukai-status--selecting {
+  background: #fdf0d0;
+  color: #7a5500;
+}
+
+.kukai-status--revealed {
+  background: #d4eadc;
+  color: #1a5c30;
+}
+
+.status-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.status-button {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
 /* year ranking */
 .year-nav {
   display: flex;

@@ -75,6 +75,18 @@ module Admin
       redirect_to edit_admin_kukai_path(kukai), notice: "お題を外しました。"
     end
 
+    def start_selection
+      kukai = Kukai.find(params[:id])
+      kukai.selecting!
+      redirect_to admin_kukais_path, notice: "「#{kukai.title}」の選句期間を開始しました。"
+    end
+
+    def reveal
+      kukai = Kukai.find(params[:id])
+      kukai.revealed!
+      redirect_to admin_kukais_path, notice: "「#{kukai.title}」の結果を発表しました。"
+    end
+
     private
 
     def kukai_params

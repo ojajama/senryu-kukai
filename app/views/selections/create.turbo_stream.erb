@@ -1,0 +1,21 @@
+<% if @error %>
+  <%= turbo_stream.replace "flash_message" do %>
+    <div id="flash_message" role="status" aria-live="polite">
+      <p><%= @error %></p>
+    </div>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace dom_id(@post, :selection) do %>
+    <div id="<%= dom_id(@post, :selection) %>">
+      <%= render "posts/selection_button", post: @post, kukai: @kukai,
+            my_selections: current_user.selections.where(kukai: @kukai).index_by(&:post_id) %>
+    </div>
+  <% end %>
+
+  <%= turbo_stream.replace "selection-count" do %>
+    <p id="selection-count" class="selection-count"
+       aria-live="polite" aria-atomic="true">
+      <%= @selected_count %> / 3 句選択済み
+    </p>
+  <% end %>
+<% end %>

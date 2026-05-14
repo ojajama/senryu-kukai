@@ -1,3 +1,5 @@
+<% kukai = local_assigns.fetch(:kukai, nil) %>
+
 <div class="post-meta-line">
   <span class="post-keyword"><%= post.keyword.word %></span>
   <span><%= l post.created_at, format: :short %></span>
@@ -7,6 +9,8 @@
   <%= simple_format(h(post.verse)) %>
 </div>
 
-<p class="post-author">
-  投稿者：<%= link_to post.user.display_name, user_posts_path(post.user) %>
-</p>
+<% unless kukai&.selecting? %>
+  <p class="post-author">
+    投稿者：<%= link_to post.user.display_name, user_posts_path(post.user) %>
+  </p>
+<% end %>

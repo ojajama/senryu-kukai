@@ -22,32 +22,60 @@
   </div>
 </section>
 
-<section class="post-form-box">
-  <div class="section-heading">
-    <h2>一句投稿する</h2>
-  </div>
+<% if @kukai.selecting? %>
+  <section class="selection-banner" aria-label="選句期間">
+    <p class="selection-banner-title">選句期間中です</p>
+    <% if user_signed_in? %>
+      <p id="selection-count" class="selection-count"
+         aria-live="polite" aria-atomic="true">
+        <%= @my_selection_count.to_i %> / 3 句選択済み
+      </p>
+      <p class="selection-hint">好きな句を3句まで選んでください。作者は結果発表まで伏せられています。</p>
+    <% else %>
+      <p><%= link_to "ログイン", new_user_session_path %>すると選句できます。</p>
+    <% end %>
+  </section>
+<% elsif @kukai.revealed? %>
+  <section class="selection-banner selection-banner--revealed" aria-label="選句結果">
+    <p class="selection-banner-title">選句結果が発表されました</p>
+  </section>
+<% end %>
 
-  <% if user_signed_in? %>
-    <div id="post_form">
-      <%= render "posts/form",
-            post: Post.new,
-            kukai: @kukai,
-            keywords: @keywords %>
+<% unless @kukai.selecting? || @kukai.revealed? %>
+  <section class="post-form-box">
+    <div class="section-heading">
+      <h2>一句投稿する</h2>
     </div>
-  <% else %>
-    <p class="signin-prompt">
-      投稿するには<%= link_to "ログイン", new_user_session_path %>してください。
-    </p>
-  <% end %>
-</section>
+
+    <% if user_signed_in? %>
+      <div id="post_form">
+        <%= render "posts/form",
+              post: Post.new,
+              kukai: @kukai,
+              keywords: @keywords %>
+      </div>
+    <% else %>
+      <p class="signin-prompt">
+        投稿するには<%= link_to "ログイン", new_user_session_path %>してください。
+      </p>
+    <% end %>
+  </section>
+<% end %>
 
 <div class="section-heading posts-heading">
-  <h2>新着投稿</h2>
+  <h2>
+    <% if @kukai.selecting? %>選句中の投稿
+    <% elsif @kukai.revealed? %>結果発表
+    <% else %>新着投稿
+    <% end %>
+  </h2>
 </div>
 
 <div id="posts">
   <% if @posts.any? %>
-    <%= render @posts %>
+    <%= render @posts,
+          kukai: @kukai,
+          my_selections: @my_selections || {} %>
   <% else %>
     <p id="no_posts">まだ投稿がありません。</p>
   <% end %>

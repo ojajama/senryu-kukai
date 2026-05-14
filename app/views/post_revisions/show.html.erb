@@ -1,6 +1,8 @@
 <h1>推敲の差分</h1>
 
 <p>
+  <%= link_to "この投稿に戻る", kukai_path(@revision.post.kukai, anchor: dom_id(@revision.post)) %>
+  ／
   <%= link_to "句会に戻る", kukai_path(@revision.post.kukai) %>
 </p>
 

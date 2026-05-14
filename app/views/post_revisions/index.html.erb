@@ -1,6 +1,8 @@
 <h1>推敲の流れ</h1>
 
 <p>
+  <%= link_to "この投稿に戻る", kukai_path(@post.kukai, anchor: dom_id(@post)) %>
+  ／
   <%= link_to "句会に戻る", kukai_path(@post.kukai) %>
 </p>
 

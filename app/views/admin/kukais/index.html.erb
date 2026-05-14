@@ -15,10 +15,10 @@
       <tr>
         <th>年月</th>
         <th>タイトル</th>
+        <th></th>
         <th>表示</th>
         <th>お題</th>
         <th>投稿</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -26,15 +26,15 @@
         <tr>
           <td><%= kukai.year %>年<%= kukai.month %>月</td>
           <td><%= kukai.title %></td>
-          <td><%= kukai.visible? ? "表示" : "非表示" %></td>
-          <td><%= kukai.keywords_count %>件</td>
-          <td><%= kukai.posts_count %>句</td>
           <td>
             <div class="table-actions">
               <%= link_to "編集", edit_admin_kukai_path(kukai) %>
               <%= link_to "公開ページ", kukai_path(kukai) %>
             </div>
           </td>
+          <td><%= kukai.visible? ? "表示" : "非表示" %></td>
+          <td><%= kukai.keywords_count %>件</td>
+          <td><%= kukai.posts_count %>句</td>
         </tr>
       <% end %>
     </tbody>

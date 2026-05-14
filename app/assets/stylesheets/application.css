@@ -375,6 +375,12 @@ fieldset.current-keyword {
 
 .back-link {
   margin: -8px 0 18px;
+  font-size: 0.8rem;
+  color: #8a7f74;
+}
+
+.back-link a {
+  color: inherit;
 }
 
 .page-header {

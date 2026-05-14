@@ -16,11 +16,13 @@
 
 <%= render "posts/post_actions", post: post %>
 
-<details class="post-extra">
-  <summary>コメントや推敲履歴を見る</summary>
+<% if post.comments.any? || post.post_revisions.any? || user_signed_in? %>
+  <details class="post-extra">
+    <summary>コメントや推敲履歴を見る</summary>
 
-  <%= render "posts/comments_block", post: post %>
-  <%= render "posts/revision_summary", post: post %>
-</details>
+    <%= render "posts/comments_block", post: post %>
+    <%= render "posts/revision_summary", post: post %>
+  </details>
+<% end %>
 
 </article>

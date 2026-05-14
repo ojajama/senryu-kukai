@@ -18,7 +18,7 @@ class PostRevisionsController < ApplicationController
       when "after"
         post.update!(verse: @revision.after_verse)
       else
-        redirect_to fallback_location: root_path, alert: "対処できませんよぉ。"
+        redirect_back fallback_location: root_path, alert: "対処できませんよぉ。"
         return
     end
 

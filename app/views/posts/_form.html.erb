@@ -1,5 +1,9 @@
 <article id="<%= dom_id(post) if post.persisted? %>" class="post-form">
 
+  <% if post.persisted? %>
+    <h2 class="sr-only">投稿を編集中</h2>
+  <% end %>
+
   <%= form_with model: post,
         url: post.persisted? ? post_path(post) : kukai_posts_path(kukai),
         data: { turbo: true } do |f| %>
@@ -20,7 +24,8 @@
       <%= f.label :verse, "川柳" %>
       <%= f.text_area :verse,
             rows: 3,
-            placeholder: "五・七・五のリズムでどうぞ" %>
+            placeholder: "五・七・五のリズムでどうぞ",
+            autofocus: post.persisted? %>
     </div>
 
     <div class="form-actions">

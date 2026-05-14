@@ -2,6 +2,8 @@
   <%= render @post %>
 <% end %>
 
+<turbo-stream action="focus" target="<%= dom_id(@post) %>"></turbo-stream>
+
 <%= turbo_stream.replace "flash_message" do %>
   <div id="flash_message" role="status" aria-live="polite">
     <p>投稿を更新しました。</p>

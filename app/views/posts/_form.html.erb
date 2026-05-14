@@ -17,10 +17,10 @@
                 <%= f.radio_button :keyword_id, k.id %>
                 <span><%= k.word %></span>
               </label>
-              <%= link_to "詳細",
+              <%= link_to "句を見る",
                     kukai_keyword_path(kukai, k),
                     class: "keyword-chip-detail",
-                    aria: { label: "「#{k.word}」の詳細を見る" } %>
+                    aria: { label: "「#{k.word}」の句を見る" } %>
             </div>
           <% end %>
         </div>

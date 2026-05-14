@@ -4,6 +4,7 @@ class Kukai < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :selections, dependent: :destroy
 
+  attribute :status, :integer, default: 0
   enum :status, { posting: 0, selecting: 1, revealed: 2 }
 
   validates :title, presence: true

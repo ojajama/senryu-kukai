@@ -18,7 +18,7 @@ class KukaisController < ApplicationController
                           .left_joins(:likes)
                           .group(:id)
                           .order("COUNT(likes.id) DESC, posts.created_at ASC")
-                          .includes(:user, :keyword)
+                          .preload(:user, :keyword)
                           .select("posts.*, COUNT(likes.id) AS likes_count")
   end
 

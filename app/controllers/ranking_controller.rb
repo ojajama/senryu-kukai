@@ -8,7 +8,7 @@ class RankingController < ApplicationController
                         .left_joins(:likes)
                         .group("posts.id")
                         .order("COUNT(likes.id) DESC, posts.created_at ASC")
-                        .includes(:user, :keyword, :kukai)
+                        .preload(:user, :keyword, :kukai)
                         .select("posts.*, COUNT(likes.id) AS likes_count")
   end
 end

@@ -25,7 +25,7 @@
       <%= f.text_area :verse,
             rows: 3,
             placeholder: "五・七・五のリズムでどうぞ",
-            autofocus: post.persisted? %>
+            data: post.persisted? ? { controller: "autofocus" } : {} %>
     </div>
 
     <div class="form-actions">

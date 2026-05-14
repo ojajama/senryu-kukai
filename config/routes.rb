@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get "post_revisions/show"
-  get "comments/create"
-  get "likes/create"
-  get "likes/destroy"
-  get "user_posts/index"
-  get "kukai_keywords/show"
-  get "posts/create"
   get "up" => "rails/health#show", as: :rails_health_check
   root to: "home#index"
 
@@ -24,9 +17,6 @@ Rails.application.routes.draw do
   resources :posts, only: [:edit, :update, :destroy] do
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create]
-  end
-
-  resources :posts do
     resources :post_revisions, only: [:index]
   end
 

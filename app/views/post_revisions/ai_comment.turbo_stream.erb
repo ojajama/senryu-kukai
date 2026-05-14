@@ -1,7 +1,7 @@
 <%= turbo_stream.replace "ai_comment_#{@revision.id}" do %>
   <%= turbo_frame_tag "ai_comment_#{@revision.id}" do %>
     <div role="status" aria-live="polite" class="ai-comment">
-      <h3>AI講評</h3>
+      <h3>AI講評 (<%= current_user.ai_comment_model == "claude" ? "An" : "Op" %>)</h3>
       <%= simple_format(h(@comment)) %>
     </div>
   <% end %>

@@ -18,6 +18,7 @@
   <div class="kukai-stats">
     <span>投稿 <%= @posts.size %>句</span>
     <span>お題 <%= @keywords.size %>件</span>
+    <%= link_to "いいねランキング", ranking_kukai_path(@kukai), class: "ranking-link" %>
   </div>
 </section>
 

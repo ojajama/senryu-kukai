@@ -877,3 +877,52 @@ fieldset.current-keyword {
     width: 100%;
   }
 }
+
+/* ranking */
+.ranking-link {
+  font-size: 0.85rem;
+}
+
+.ranking-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ranking-item {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  row-gap: 2px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e8e4de;
+  align-items: baseline;
+}
+
+.ranking-rank {
+  grid-row: 1 / 3;
+  align-self: center;
+  font-size: 0.85rem;
+  color: #8a7f74;
+  text-align: right;
+}
+
+.ranking-verse {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.ranking-meta {
+  font-size: 0.8rem;
+  color: #8a7f74;
+  grid-column: 2;
+}
+
+.ranking-likes {
+  grid-row: 1 / 3;
+  align-self: center;
+  font-size: 0.9rem;
+  color: #b04060;
+  white-space: nowrap;
+}

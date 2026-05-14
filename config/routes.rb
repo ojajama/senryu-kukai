@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   resources :keywords, only: [:index]
   resources :kukais, only: [:index, :show] do
+    member do
+      get :ranking
+    end
     resources :keywords, only: [:show], controller: "kukai_keywords"
     resources :posts, only: [:create]
   end

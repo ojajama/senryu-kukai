@@ -1,0 +1,35 @@
+<% content_for :title, "いいねランキング - #{@kukai.title}" %>
+<p class="back-link"><%= link_to "句会に戻る", kukai_path(@kukai) %></p>
+
+<section class="kukai-header">
+  <p class="kukai-month"><%= @kukai.year %>年<%= @kukai.month %>月の句会</p>
+  <h1>いいねランキング</h1>
+</section>
+
+<% if @ranked_posts.any? %>
+  <%
+    current_rank = 1
+    ranks = @ranked_posts.each_with_index.map do |post, i|
+      current_rank = i + 1 if i > 0 && @ranked_posts[i - 1].likes_count != post.likes_count
+      current_rank
+    end
+  %>
+  <ol class="ranking-list">
+    <% @ranked_posts.each_with_index do |post, i| %>
+      <li class="ranking-item">
+        <span class="ranking-rank" aria-label="<%= ranks[i] %>位">
+          <%= ranks[i] %>位
+        </span>
+        <span class="ranking-verse"><%= post.verse %></span>
+        <span class="ranking-meta">
+          <%= post.user.display_name %>&nbsp;／&nbsp;<%= post.keyword.word %>
+        </span>
+        <span class="ranking-likes" aria-label="いいね#{post.likes_count}件">
+          ♥ <%= post.likes_count %>
+        </span>
+      </li>
+    <% end %>
+  </ol>
+<% else %>
+  <p>まだ投稿がありません。</p>
+<% end %>

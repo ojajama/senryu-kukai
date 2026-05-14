@@ -997,6 +997,20 @@ fieldset.current-keyword {
   color: #8a7f74;
 }
 
+.kukai-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.kukai-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e8e4de;
+}
+
 .kukai-status {
   font-size: 0.8rem;
   padding: 2px 8px;

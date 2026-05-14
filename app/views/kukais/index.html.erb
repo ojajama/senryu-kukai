@@ -1,10 +1,17 @@
 <% content_for :title, "句会一覧" %>
 <h2>句会一覧</h2>
 
-<ul>
+<ul class="kukai-list">
   <% @kukais.each do |k| %>
-    <li>
+    <li class="kukai-list-item">
       <%= link_to k.title, kukai_path(k) %>
+      <% if k.revealed? %>
+        <span class="kukai-status kukai-status--revealed">終了</span>
+      <% elsif k.selecting? %>
+        <span class="kukai-status kukai-status--selecting">選句中</span>
+      <% else %>
+        <span class="kukai-status kukai-status--posting">投稿中</span>
+      <% end %>
     </li>
   <% end %>
 </ul>

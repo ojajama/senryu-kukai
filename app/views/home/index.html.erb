@@ -2,10 +2,25 @@
 
 <% if @current_kukai.present? %>
   <section class="current-kukai">
-    <p>
-      今月の句会：
-      <%= link_to @current_kukai.title, kukai_path(@current_kukai) %>
-    </p>
+    <% if @current_kukai.revealed? %>
+      <p>
+        今月の句会：
+        <%= link_to @current_kukai.title, kukai_path(@current_kukai) %>
+        <span class="kukai-status kukai-status--revealed">この句会は終了しました</span>
+      </p>
+    <% elsif @current_kukai.selecting? %>
+      <p>
+        今月の句会：
+        <%= link_to @current_kukai.title, kukai_path(@current_kukai) %>
+        <span class="kukai-status kukai-status--selecting">選句期間中</span>
+      </p>
+    <% else %>
+      <p>
+        今月の句会：
+        <%= link_to @current_kukai.title, kukai_path(@current_kukai) %>
+        <span class="kukai-status kukai-status--posting">投稿受付中</span>
+      </p>
+    <% end %>
   </section>
 <% else %>
   <p>現在開催中の川柳句会はありません。</p>

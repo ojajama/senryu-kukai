@@ -12,7 +12,11 @@
   </div>
 </section>
 
-<p class="back-link"><%= link_to "句会に戻る", kukai_path(@kukai) %></p>
+<p class="back-link">
+  <%= link_to "お題一覧に戻る", keywords_path %>
+  ／
+  <%= link_to "句会に戻る", kukai_path(@kukai) %>
+</p>
 
 <div class="section-heading posts-heading">
   <h2>お題別投稿</h2>

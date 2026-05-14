@@ -64,9 +64,6 @@
    justify-content: flex-end;
  }
 
- details.nav-menu > nav {
-   display: flex !important;
- }
 
  nav a,
  nav button,

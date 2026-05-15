@@ -5,15 +5,17 @@ keywords_path = Rails.root.join("db/seeds/keywords.csv")
 if keywords_path.exist?
   imported_count = 0
 
-  CSV.foreach(keywords_path, headers: true) do |row|
+  CSV.foreach(keywords_path, headers: true, encoding: "bom|utf-8") do |row|
     word = row["word"].to_s.strip
     next if word.blank?
 
     keyword = Keyword.find_or_initialize_by(word: word)
-    keyword.reading = row["reading"].to_s.strip.presence
-    keyword.pos = row["pos"].to_s.strip.presence
-    keyword.category = row["category"].to_s.strip
-    keyword.len = row["len"].presence&.to_i
+    keyword.reading  = row["reading"].to_s.strip.presence
+    keyword.pos      = row["pos"].to_s.strip.presence
+    keyword.sub_pos  = row["sub_pos"].to_s.strip.presence
+    keyword.category = row["category"].to_s.strip.presence
+    keyword.sub_cate = row["sub_cate"].to_s.strip.presence
+    keyword.len      = row["len"].presence&.to_i
     keyword.save!
 
     imported_count += 1

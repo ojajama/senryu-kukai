@@ -61,11 +61,14 @@
   </h2>
 </div>
 
-<div id="posts">
+<div id="posts" class="posts-list">
   <% if @posts.any? %>
-    <%= render @posts,
-          kukai: @kukai,
-          my_selections: @my_selections || {} %>
+    <% if @kukai.selecting? || @kukai.revealed? %>
+      <%= render @posts, kukai: @kukai, my_selections: @my_selections || {} %>
+    <% else %>
+      <%= render partial: "posts/post_row", collection: @posts, as: :post,
+            locals: { kukai: @kukai } %>
+    <% end %>
   <% else %>
     <p id="no_posts">まだ投稿がありません。</p>
   <% end %>

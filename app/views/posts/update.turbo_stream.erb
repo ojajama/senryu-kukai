@@ -1,5 +1,5 @@
 <%= turbo_stream.replace @post do %>
-  <%= render @post %>
+  <%= render partial: "posts/post_row", locals: { post: @post, kukai: @post.kukai } %>
 <% end %>
 
 <turbo-stream action="focus" target="<%= dom_id(@post) %>"></turbo-stream>

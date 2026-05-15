@@ -1,0 +1,41 @@
+<% kukai = local_assigns.fetch(:kukai, post.kukai) %>
+
+<article id="<%= dom_id(post) %>" class="post-row">
+  <div class="post-row-verse">
+    <%= link_to post.verse, post_path(post), class: "post-row-verse-link" %>
+  </div>
+  <div class="post-row-meta">
+    <span class="post-row-keyword"><%= post.keyword.word %></span>
+    <% unless kukai&.selecting? %>
+      <span class="post-row-author"><%= post.user.display_name %></span>
+    <% end %>
+    <span class="post-row-date"><%= l post.created_at, format: :short %></span>
+
+    <%= turbo_frame_tag "like_post_#{post.id}" do %>
+      <% if user_signed_in? %>
+        <% like = current_user.likes.find_by(post: post) %>
+        <% if like %>
+          <%= button_to "♥ #{post.likes.count}",
+                post_like_path(post, like),
+                method: :delete,
+                class: "like-inline-button liked" %>
+        <% else %>
+          <%= button_to "♡ #{post.likes.count}",
+                post_likes_path(post),
+                method: :post,
+                class: "like-inline-button" %>
+        <% end %>
+      <% else %>
+        <span class="like-count">♡ <%= post.likes.count %></span>
+      <% end %>
+    <% end %>
+
+    <% if user_signed_in? && post.user == current_user %>
+      <%= link_to "編集", edit_post_path(post), class: "post-row-action", data: { turbo_stream: true } %>
+      <%= button_to "削除", post_path(post),
+            method: :delete,
+            class: "post-row-action post-row-delete",
+            data: { turbo_confirm: "本当に削除しますか？" } %>
+    <% end %>
+  </div>
+</article>

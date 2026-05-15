@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
+  before_action :set_post, only: [:show]
   before_action :set_own_post, only: [:edit, :update, :destroy]
   before_action :set_keywords, only: [:edit, :update]
+
+  def show
+  end
+
   def create
     @kukai = Kukai.find(params[:kukai_id])
     @keywords = @kukai.keywords
@@ -63,6 +68,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
   def set_own_post
     @post = current_user.posts.find(params[:id])

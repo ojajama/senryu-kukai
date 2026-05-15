@@ -1,8 +1,8 @@
 <% if @post.persisted? %>
   <%= turbo_stream.remove "no_posts" %>
   <%= turbo_stream.prepend "posts",
-        partial: "posts/post",
-        locals: { post: @post } %>
+        partial: "posts/post_row",
+        locals: { post: @post, kukai: @kukai } %>
 <% end %>
       
 <%= turbo_stream.replace "post_form" do %>

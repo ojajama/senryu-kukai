@@ -17,10 +17,10 @@
                 <%= f.radio_button :keyword_id, k.id %>
                 <span><%= k.word %></span>
               </label>
-              <%= link_to "句を見る",
+              <%= link_to "の句",
                     kukai_keyword_path(kukai, k),
                     class: "keyword-chip-detail",
-                    aria: { label: "「#{k.word}」の句を見る" } %>
+                    aria: { label: "「#{k.word}」の句" } %>
             </div>
           <% end %>
         </div>
@@ -30,7 +30,7 @@
       <%= f.label :verse, "川柳" %>
       <%= f.text_area :verse,
             rows: 3,
-            placeholder: "五・七・五のリズムでどうぞ",
+            placeholder: post.new_record? ? "五・七・五のリズムでどうぞ" : "",
             data: post.persisted? ? { controller: "autofocus" } : {} %>
     </div>
 

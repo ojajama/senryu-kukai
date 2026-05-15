@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_14_070731) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_15_013746) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -105,7 +105,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_14_070731) do
   create_table "users", force: :cascade do |t|
     t.boolean "admin", default: false, null: false
     t.string "ai_comment_model", default: "openai", null: false
-    t.string "ai_comment_style"
+    t.string "ai_comment_style", default: "normal", null: false
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

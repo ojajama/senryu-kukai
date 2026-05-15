@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   root to: "home#index"
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
+
+  get  "/invite/:token",          to: "invitations#show",     as: :invitation
+  get  "/invite/:token/complete", to: "invitations#complete",  as: :complete_invitation
+  post "/invite/:token/register", to: "invitations#register",  as: :register_invitation
 
   get "/ranking(/:year)", to: "ranking#show", as: :ranking, constraints: { year: /\d{4}/ }
 
@@ -34,6 +38,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :invitations, only: [:index, :create]
+    resources :users, only: [:index, :edit, :update]
     resources :keywords, only: [:index, :edit, :update]
     resources :kukais, only: [:index, :new, :create, :edit, :update] do
       member do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_15_013746) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_15_062845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,6 +22,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_15_013746) do
     t.bigint "user_id", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "initial_password"
+    t.string "token", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "used_at"
+    t.index ["token"], name: "index_invitations_on_token", unique: true
   end
 
   create_table "keywords", force: :cascade do |t|

@@ -1,0 +1,30 @@
+<% content_for :title, "アカウント作成" %>
+
+<section class="page-header">
+  <h1>ようこそ</h1>
+  <p>川柳句会へご招待します。ニックネームを決めてください。</p>
+</section>
+
+<div class="invitation-form-wrap">
+  <% if @errors&.any? %>
+    <div class="form-errors" role="alert">
+      <% @errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= form_with url: register_invitation_path(@invitation.token), method: :post, local: true do |f| %>
+    <div class="form-group">
+      <label for="nickname">ニックネーム</label>
+      <p class="form-hint" id="nickname-hint">句会で表示される名前です。あとからアカウント設定で変更できます。</p>
+      <%= f.text_field :nickname,
+            id: "nickname",
+            aria: { describedby: "nickname-hint" },
+            autocomplete: "nickname",
+            autofocus: true,
+            maxlength: 30 %>
+    </div>
+    <%= f.submit "アカウントを作成する", class: "primary-submit-button" %>
+  <% end %>
+</div>

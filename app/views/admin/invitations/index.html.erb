@@ -1,0 +1,111 @@
+<% content_for :title, "招待リンク管理" %>
+<section class="page-header">
+  <h1>招待リンク管理</h1>
+  <p>友人を招待するための1回限りのリンクを発行できます。リンクを開くとニックネームを入力するだけでアカウントが作成されます。</p>
+</section>
+
+<section class="admin-form-section">
+  <h2>新しい招待リンクを発行</h2>
+  <%= form_with model: @invitation, url: admin_invitations_path, local: true do |f| %>
+    <% if @invitation.errors.any? %>
+      <div class="form-errors" role="alert">
+        <% @invitation.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email, placeholder: "friend@example.com", autocomplete: "off" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :initial_password, "初期パスワード（数字4桁以上）" %>
+      <p class="form-hint">全角数字で入力しても半角に変換されます。</p>
+      <%= f.text_field :initial_password, placeholder: "例：1234", autocomplete: "off",
+            inputmode: "numeric", data: { normalize: "numeric" } %>
+    </div>
+    <%= f.submit "招待リンクを発行", class: "primary-link-button" %>
+  <% end %>
+</section>
+
+<div class="admin-summary">
+  <span>発行済み <%= @invitations.count %>件</span>
+</div>
+
+<div class="admin-table-wrap">
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>発行日時</th>
+        <th>メールアドレス</th>
+        <th>初期PW</th>
+        <th>招待リンク</th>
+        <th>使用状況</th>
+        <th>使用日時</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @invitations.each do |invitation| %>
+        <tr>
+          <td><%= invitation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= invitation.email %></td>
+          <td>
+            <span class="pw-masked">••••••</span>
+            <span class="pw-plain" hidden><%= invitation.initial_password %></span>
+            <button type="button" class="toggle-pw-button" aria-label="パスワードを表示">表示</button>
+          </td>
+          <td>
+            <% if invitation.used? %>
+              <span class="text-muted">（使用済み）</span>
+            <% else %>
+              <code class="invitation-url"><%= invitation_url(invitation.token) %></code>
+              <button type="button"
+                      class="copy-button"
+                      data-url="<%= invitation_url(invitation.token) %>"
+                      aria-label="招待リンクをコピー">コピー</button>
+            <% end %>
+          </td>
+          <td>
+            <% if invitation.used? %>
+              <span class="status-used">使用済み</span>
+            <% else %>
+              <span class="status-unused">未使用</span>
+            <% end %>
+          </td>
+          <td><%= invitation.used_at&.strftime("%Y/%m/%d %H:%M") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.querySelectorAll(".copy-button").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      navigator.clipboard.writeText(btn.dataset.url).then(function() {
+        btn.textContent = "コピーしました";
+        setTimeout(function() { btn.textContent = "コピー"; }, 2000);
+      });
+    });
+  });
+
+  document.querySelectorAll("[data-normalize='numeric']").forEach(function(input) {
+    input.addEventListener("input", function() {
+      input.value = input.value.replace(/[０-９]/g, function(ch) {
+        return String.fromCharCode(ch.charCodeAt(0) - 0xFEE0);
+      });
+    });
+  });
+
+  document.querySelectorAll(".toggle-pw-button").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      var masked = btn.previousElementSibling.previousElementSibling;
+      var plain  = btn.previousElementSibling;
+      var showing = !plain.hidden;
+      masked.hidden = !showing;
+      plain.hidden  = showing;
+      btn.textContent = showing ? "表示" : "非表示";
+      btn.setAttribute("aria-label", showing ? "パスワードを表示" : "パスワードを非表示");
+    });
+  });
+</script>

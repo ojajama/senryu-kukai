@@ -40,6 +40,8 @@
               <% if current_user.admin? %>
                 <%= link_to "お題管理", admin_keywords_path, class: "nav-user-action" %>
                 <%= link_to "句会管理", admin_kukais_path, class: "nav-user-action" %>
+                <%= link_to "招待管理", admin_invitations_path, class: "nav-user-action" %>
+                <%= link_to "ユーザー管理", admin_users_path, class: "nav-user-action" %>
               <% end %>
               <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-user-action" %>
             <% else %>

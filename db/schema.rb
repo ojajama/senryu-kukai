@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_15_062845) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_15_090826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_15_062845) do
     t.integer "len"
     t.string "pos"
     t.string "reading"
+    t.string "sub_cate"
+    t.string "sub_pos"
     t.datetime "updated_at", null: false
     t.string "word", null: false
     t.index ["category"], name: "index_keywords_on_category"

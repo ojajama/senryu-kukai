@@ -1147,10 +1147,14 @@ fieldset.current-keyword {
 .post-row-verse {
   flex: 1 1 auto;
   min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
 }
 
 .post-row-verse-link {
-  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -1165,10 +1169,9 @@ fieldset.current-keyword {
 }
 
 .revision-mark {
+  flex: 0 0 auto;
   font-size: 0.7rem;
   color: #aaa;
-  margin-left: 0.3em;
-  vertical-align: middle;
   text-decoration: none;
   -webkit-user-select: none;
   user-select: none;

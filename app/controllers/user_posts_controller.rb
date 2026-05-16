@@ -2,7 +2,7 @@ class UserPostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @posts = @user.posts
-                  .includes(:user, :keyword, :kukai, :likes, comments: :user)
+                  .includes(:user, :keyword, :kukai, :likes, :post_revisions, comments: :user)
                   .order(created_at: :desc)
   end
 end

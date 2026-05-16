@@ -1164,6 +1164,15 @@ fieldset.current-keyword {
   color: #0f5f76;
 }
 
+.revision-mark {
+  font-size: 0.7rem;
+  color: #aaa;
+  margin-left: 0.3em;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 .post-row-meta {
   display: flex;
   align-items: center;

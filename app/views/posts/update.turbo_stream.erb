@@ -6,6 +6,11 @@
 
 <%= turbo_stream.replace "flash_message" do %>
   <div id="flash_message" role="status" aria-live="polite">
-    <p>投稿を更新しました。</p>
+    <p>
+      投稿を更新しました。
+      <% if (latest = @post.post_revisions.max_by(&:created_at)) %>
+        <%= link_to "推敲履歴を見る →", post_revision_path(latest) %>
+      <% end %>
+    </p>
   </div>
 <% end %>

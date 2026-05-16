@@ -3,6 +3,9 @@
 <article id="<%= dom_id(post) %>" class="post-row">
   <div class="post-row-verse">
     <%= link_to post.verse, post_path(post), class: "post-row-verse-link" %>
+    <% if post.post_revisions.any? %>
+      <span class="revision-mark" title="推敲済み">✎</span>
+    <% end %>
   </div>
   <div class="post-row-meta">
     <span class="post-row-keyword"><%= post.keyword.word %></span>
@@ -31,7 +34,6 @@
     <% end %>
 
     <% if user_signed_in? && post.user == current_user %>
-      <%= link_to "編集", edit_post_path(post), class: "post-row-action", data: { turbo_stream: true } %>
       <%= button_to "削除", post_path(post),
             method: :delete,
             class: "post-row-action post-row-delete",

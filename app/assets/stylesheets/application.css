@@ -1171,7 +1171,7 @@ fieldset.current-keyword {
 .revision-mark {
   flex: 0 0 auto;
   font-size: 0.7rem;
-  color: #aaa;
+  color: #888;
   text-decoration: none;
   -webkit-user-select: none;
   user-select: none;
@@ -1189,6 +1189,10 @@ fieldset.current-keyword {
   font-size: 0.75rem;
   color: #6b6258;
   white-space: nowrap;
+}
+
+.post-row-meta form {
+  display: contents;
 }
 
 .post-row-keyword {

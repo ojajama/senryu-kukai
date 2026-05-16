@@ -3,7 +3,9 @@
 <article id="<%= dom_id(post) %>" class="post-row">
   <div class="post-row-verse">
     <%= link_to post.verse, post_path(post), class: "post-row-verse-link" %>
-    <% if post.post_revisions.any? %>
+    <% if user_signed_in? && post.user == current_user %>
+      <%= link_to "✎", edit_post_path(post), class: "revision-mark edit-mark", title: "編集する" %>
+    <% elsif post.post_revisions.any? %>
       <span class="revision-mark" title="推敲済み">✎</span>
     <% end %>
   </div>

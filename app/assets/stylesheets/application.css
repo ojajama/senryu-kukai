@@ -1169,8 +1169,13 @@ fieldset.current-keyword {
   color: #aaa;
   margin-left: 0.3em;
   vertical-align: middle;
+  text-decoration: none;
   -webkit-user-select: none;
   user-select: none;
+}
+
+.edit-mark:hover {
+  color: #0f5f76;
 }
 
 .post-row-meta {

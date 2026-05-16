@@ -1,0 +1,48 @@
+<% content_for :title, "AI選評の指針" %>
+<section class="page-header">
+  <h1>AI選評の指針</h1>
+  <p>ここに書いた指針が、AI選評のプロンプトに組み込まれます。</p>
+</section>
+
+<div class="admin-summary">
+  <span>指針 <%= @guidelines.count %>件</span>
+  <%= link_to "＋ 指針を追加", new_admin_ai_guideline_path, class: "primary-link-button" %>
+</div>
+
+<% if @guidelines.any? %>
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>種別</th>
+          <th>内容</th>
+          <th>状態</th>
+          <th>追加日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @guidelines.each do |guideline| %>
+          <tr class="<%= 'inactive-row' unless guideline.active? %>">
+            <td><%= guideline.example? ? "良い例" : "指針" %></td>
+            <td class="guideline-body">
+              <% if guideline.example? %>
+                <small><%= guideline.before_verse %> → <%= guideline.after_verse %></small><br>
+              <% end %>
+              <%= guideline.body %>
+            </td>
+            <td><%= guideline.active? ? "有効" : "無効" %></td>
+            <td><%= guideline.created_at.strftime("%Y/%m/%d") %></td>
+            <td class="table-actions">
+              <%= link_to "編集", edit_admin_ai_guideline_path(guideline), class: "table-action-link" %>
+              <%= button_to "削除", admin_ai_guideline_path(guideline), method: :delete,
+                    data: { confirm: "削除しますか？" }, class: "table-action-link danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="empty-message">まだ指針がありません。</p>
+<% end %>

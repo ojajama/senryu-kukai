@@ -1,0 +1,22 @@
+<%= form_with model: [:admin, guideline] do |f| %>
+  <% if guideline.errors.any? %>
+    <div class="form-errors" role="alert">
+      <% guideline.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :body, "指針の内容" %>
+    <%= f.text_area :body, rows: 5, placeholder: "例：上五・中七・下五のリズムの変化を具体的に評価してほしい" %>
+  </div>
+
+  <div class="form-group form-group--inline">
+    <%= f.check_box :active %>
+    <%= f.label :active, "有効にする" %>
+  </div>
+
+  <%= f.submit guideline.new_record? ? "追加する" : "更新する", class: "primary-link-button" %>
+  <%= link_to "戻る", admin_ai_guidelines_path, class: "secondary-link-button" %>
+<% end %>

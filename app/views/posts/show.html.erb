@@ -22,7 +22,7 @@
 
   <% if user_signed_in? && @post.user == current_user %>
     <div class="post-actions">
-      <%= link_to "編集", edit_post_path(@post), data: { turbo_stream: true } %>
+      <%= link_to "編集", edit_post_path(@post) %>
       <%= button_to "削除", post_path(@post),
             method: :delete,
             data: { turbo_confirm: "本当に削除しますか？" } %>

@@ -44,6 +44,12 @@
           <div role="status" aria-live="polite" class="ai-comment">
             <h3>AI講評 (<%= current_user&.ai_comment_model == "claude" ? "An" : "Op" %>)</h3>
             <%= simple_format(h(@revision.ai_comment)) %>
+            <% if current_user&.admin? %>
+              <%= button_to "良い例として保存",
+                    save_as_example_admin_post_revision_path(@revision),
+                    method: :post,
+                    class: "save-as-example-button" %>
+            <% end %>
           </div>
         <% end %>
       <% end %>

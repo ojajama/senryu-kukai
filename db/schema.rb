@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_15_090826) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_16_022220) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "ai_guidelines", force: :cascade do |t|
+    t.boolean "active", default: true, null: false
+    t.text "after_verse"
+    t.text "before_verse"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.string "kind", default: "principle", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "body"

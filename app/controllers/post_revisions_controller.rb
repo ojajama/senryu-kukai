@@ -67,6 +67,21 @@ class PostRevisionsController < ApplicationController
   def generate_ai_comment(revision)
     style = current_user.ai_comment_style.presence_in(AI_COMMENT_PROMPTS.keys) || "gentle"
     prompt = AI_COMMENT_PROMPTS[style]
+
+    principles = AiGuideline.active_principles.pluck(:body)
+    principle_text = principles.any? ? "\n\n【選評の指針】\n" + principles.map.with_index(1) { |g, i| "#{i}. #{g}" }.join("\n") : ""
+
+    examples = AiGuideline.active_examples.select(:before_verse, :after_verse, :body)
+    example_text = if examples.any?
+      "\n\n【良い選評の例】\n" + examples.map.with_index(1) { |e, i|
+        "例#{i}:\n推敲前：#{e.before_verse}\n推敲後：#{e.after_verse}\n選評：#{e.body}"
+      }.join("\n\n")
+    else
+      ""
+    end
+
+    guideline_text = principle_text + example_text
+
     user_text = <<~TEXT
       次の川柳の推敲差分に、短く講評してください。
 
@@ -79,7 +94,7 @@ class PostRevisionsController < ApplicationController
       見るポイント：
       ・どこが良くなったか
       ・惜しいところがあれば一つだけ
-      ・#{prompt[:tone]}
+      ・#{prompt[:tone]}#{guideline_text}
     TEXT
 
     case current_user.ai_comment_model

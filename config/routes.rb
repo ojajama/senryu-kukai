@@ -41,6 +41,12 @@ Rails.application.routes.draw do
     resources :invitations, only: [:index, :create]
     resources :users, only: [:index, :edit, :update]
     resources :keywords, only: [:index, :edit, :update]
+    resources :ai_guidelines, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :post_revisions, only: [] do
+      member do
+        post :save_as_example
+      end
+    end
     resources :kukais, only: [:index, :new, :create, :edit, :update] do
       member do
         post :add_random_keyword

@@ -4,22 +4,13 @@
 <%= render "form",
       post: @post,
       kukai: @post.kukai,
-      keywords: @keywords %>
+      keywords: @keywords,
+      turbo: false %>
 
-<h2>推敲履歴</h2>
-
-<% if @post.post_revisions.any? %>
-  <ul>
-    <% @post.post_revisions.order(created_at: :desc).each do |r| %>
-      <li>
-        <%= r.after_verse %><br>
-        <small>投稿日：<%= l r.created_at, format: :short %></small>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>推敲履歴はありません。</p>
-<% end %>
+<section class="post-detail-revisions">
+  <h2>推敲履歴</h2>
+  <%= render "posts/revision_summary", post: @post %>
+</section>
 
 <p>
   <%= link_to "句会に戻る", kukai_path(@post.kukai) %>

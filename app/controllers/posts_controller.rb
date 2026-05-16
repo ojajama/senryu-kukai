@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to kukai_path(@post.kukai), notice: "投稿を更新しました。" }
+        format.html { redirect_to post_path(@post), notice: "投稿を更新しました。" }
       end
 
     else

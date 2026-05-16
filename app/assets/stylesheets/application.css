@@ -1216,6 +1216,20 @@ fieldset.current-keyword {
   font-weight: 700;
 }
 
+.like-action-button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.like-action-button.liked {
+  color: #c0392b;
+  font-weight: 700;
+}
+
 .post-row-action {
   font-size: 0.7rem;
   color: #0f5f76;

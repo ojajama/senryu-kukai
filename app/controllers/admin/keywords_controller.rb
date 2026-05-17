@@ -21,7 +21,7 @@ module Admin
     private
 
     def keyword_params
-      params.require(:keyword).permit(:word, :reading, :pos, :category, :len)
+      params.require(:keyword).permit(:word, :reading, :pos, :sub_pos, :category, :sub_cate, :len)
     end
   end
 end

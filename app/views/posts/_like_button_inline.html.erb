@@ -1,0 +1,18 @@
+<%= turbo_frame_tag "like_post_inline_#{post.id}" do %>
+  <% if user_signed_in? %>
+    <% like = current_user.likes.find_by(post: post) %>
+    <% if like %>
+      <%= button_to "♥ #{post.likes.count}",
+            post_like_path(post, like),
+            method: :delete,
+            class: "like-inline-button liked" %>
+    <% else %>
+      <%= button_to "♡ #{post.likes.count}",
+            post_likes_path(post),
+            method: :post,
+            class: "like-inline-button" %>
+    <% end %>
+  <% else %>
+    <span class="like-count">♡ <%= post.likes.count %></span>
+  <% end %>
+<% end %>

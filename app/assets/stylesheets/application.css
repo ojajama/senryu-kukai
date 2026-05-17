@@ -1138,7 +1138,7 @@ fieldset.current-keyword {
 
 .post-row {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.5rem;
   padding: 7px 2px;
   border-bottom: 1px solid #ebe5dc;
@@ -1191,6 +1191,7 @@ fieldset.current-keyword {
   white-space: nowrap;
 }
 
+.post-row-meta turbo-frame,
 .post-row-meta form {
   display: contents;
 }

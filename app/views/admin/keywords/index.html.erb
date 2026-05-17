@@ -9,16 +9,16 @@
 </div>
 
 <div class="admin-table-wrap">
-  <table class="admin-table">
+  <table class="admin-table" data-controller="table-sort">
     <thead>
       <tr>
-        <th>表記</th>
-        <th>読み</th>
-        <th>品詞</th>
-        <th>品詞細分</th>
-        <th>カテゴリ</th>
-        <th>カテゴリ細分</th>
-        <th>音数</th>
+        <th class="sortable" data-action="click->table-sort#sort">表記</th>
+        <th class="sortable" data-action="click->table-sort#sort">読み</th>
+        <th class="sortable" data-action="click->table-sort#sort">品詞</th>
+        <th class="sortable" data-action="click->table-sort#sort">品詞細分</th>
+        <th class="sortable" data-action="click->table-sort#sort">カテゴリ</th>
+        <th class="sortable" data-action="click->table-sort#sort">カテゴリ細分</th>
+        <th class="sortable" data-action="click->table-sort#sort">音数</th>
         <th></th>
       </tr>
     </thead>

@@ -536,6 +536,19 @@ fieldset.current-keyword {
   border-bottom: 0;
 }
 
+.admin-table th.sortable {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.admin-table th.sortable:hover {
+  color: #0f5f76;
+}
+
+.admin-table th[data-sort-dir="asc"]::after  { content: " ▲"; font-size: 0.7em; }
+.admin-table th[data-sort-dir="desc"]::after { content: " ▼"; font-size: 0.7em; }
+
 .table-actions {
   display: flex;
   flex-wrap: wrap;

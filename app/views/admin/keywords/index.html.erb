@@ -4,8 +4,20 @@
   <p>登録済みのお題を確認・編集できます。</p>
 </section>
 
-<div class="admin-summary">
+<div class="admin-summary with-actions">
   <span>登録 <%= @keywords.size %>件</span>
+  <details class="csv-import-box">
+    <summary>CSVで一括登録</summary>
+    <div class="csv-import-form">
+      <p class="csv-import-note">列順：<code>word, reading, pos, sub_pos, category, sub_cate, len</code>（1行目はヘッダー）。既存のwordはスキップ。BOM付きUTF-8可。</p>
+      <%= form_with url: import_admin_keywords_path, multipart: true do |f| %>
+        <div class="csv-import-row">
+          <%= f.file_field :file, accept: ".csv", aria: { label: "CSVファイルを選択" } %>
+          <%= f.submit "インポート", class: "primary-button" %>
+        </div>
+      <% end %>
+    </div>
+  </details>
 </div>
 
 <div class="admin-table-wrap">

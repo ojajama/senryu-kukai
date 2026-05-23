@@ -40,7 +40,11 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :invitations, only: [:index, :create]
     resources :users, only: [:index, :edit, :update]
-    resources :keywords, only: [:index, :edit, :update]
+    resources :keywords, only: [:index, :edit, :update] do
+      collection do
+        post :import
+      end
+    end
     resources :ai_guidelines, only: [:index, :new, :create, :edit, :update, :destroy]
     resources :post_revisions, only: [] do
       member do

@@ -504,6 +504,41 @@ fieldset.current-keyword {
   justify-content: space-between;
 }
 
+.csv-import-box summary {
+  cursor: pointer;
+  color: #0f5f76;
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+}
+
+.csv-import-form {
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d8d2c8;
+  border-radius: 8px;
+  background: #fffdf9;
+}
+
+.csv-import-note {
+  margin: 0 0 0.6rem;
+  font-size: 0.82rem;
+  color: #6b6258;
+}
+
+.csv-import-note code {
+  background: #f0ece6;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.csv-import-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
 .admin-table-wrap {
   overflow-x: auto;
   border: 1px solid #d8d2c8;

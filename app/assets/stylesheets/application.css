@@ -1290,3 +1290,85 @@ fieldset.current-keyword {
   margin: 0 0 12px;
   color: #5a4f46;
 }
+
+/* ===== 上中下の句 分割入力フォーム ===== */
+
+.verse-parts {
+  margin: 0.5rem 0;
+}
+
+.verse-swap {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  margin: 0.25rem 0;
+}
+
+.swap-button {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid #bdb5aa;
+  border-radius: 6px;
+  background: #f5f0eb;
+  color: #193f45;
+  cursor: pointer;
+  min-height: 40px;
+}
+
+.swap-button:hover,
+.swap-button:focus {
+  background: #edf8fa;
+  border-color: #177b91;
+  outline: 3px solid #d4edf2;
+}
+
+.verse-preview {
+  margin: 1rem 0 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #fffdf9;
+  border: 1px solid #d8d2c8;
+  border-radius: 8px;
+}
+
+.verse-preview-label {
+  margin: 0 0 0.3rem;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #6b6258;
+}
+
+.verse-preview-text {
+  display: block;
+  font-size: 1.1rem;
+  color: #193f45;
+  min-height: 1.5em;
+  word-break: break-all;
+}
+
+/* ===== ナビ 閉じるボタン（スマホのみ表示） ===== */
+
+.nav-close-button {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .nav-close-button {
+    display: flex;
+    width: 100%;
+    min-height: 40px;
+    align-items: center;
+    padding: 0 0.75rem;
+    margin-bottom: 4px;
+    border: 1px solid #d8d2c8;
+    border-radius: 6px;
+    background: #f5f0eb;
+    color: #193f45;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .nav-close-button:focus {
+    outline: 3px solid #d4edf2;
+    border-color: #177b91;
+  }
+}

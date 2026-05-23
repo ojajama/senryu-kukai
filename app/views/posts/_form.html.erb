@@ -27,12 +27,52 @@
         </div>
     </fieldset>
 
-    <div class="form-row">
-      <%= f.label :verse, "川柳" %>
-      <%= f.text_area :verse,
-            rows: 3,
-            placeholder: post.new_record? ? "五・七・五のリズムでどうぞ" : "",
-            data: post.persisted? ? { controller: "autofocus" } : {} %>
+    <div class="verse-parts" data-controller="verse-parts">
+      <div class="form-row">
+        <%= f.label :verse_upper, "上の句（5音）" %>
+        <%= f.text_field :verse_upper,
+              placeholder: "例：春の風",
+              autocomplete: "off",
+              data: { verse_parts_target: "upper", action: "input->verse-parts#updatePreview" } %>
+      </div>
+
+      <div class="form-row">
+        <%= f.label :verse_middle, "中の句（7音）" %>
+        <%= f.text_field :verse_middle,
+              placeholder: "例：やさしく吹いて",
+              autocomplete: "off",
+              data: { verse_parts_target: "middle", action: "input->verse-parts#updatePreview" } %>
+      </div>
+
+      <div class="form-row">
+        <%= f.label :verse_lower, "下の句（5音）" %>
+        <%= f.text_field :verse_lower,
+              placeholder: "例：うれしいな",
+              autocomplete: "off",
+              data: { verse_parts_target: "lower", action: "input->verse-parts#updatePreview" } %>
+      </div>
+
+      <div class="verse-swap">
+        <button type="button"
+                class="swap-button"
+                data-action="verse-parts#swapUpperMiddle"
+                aria-label="上の句と中の句を入れ替える">上↔中</button>
+        <button type="button"
+                class="swap-button"
+                data-action="verse-parts#swapMiddleLower"
+                aria-label="中の句と下の句を入れ替える">中↔下</button>
+        <button type="button"
+                class="swap-button"
+                data-action="verse-parts#swapUpperLower"
+                aria-label="上の句と下の句を入れ替える">上↔下</button>
+      </div>
+
+      <div class="verse-preview" aria-live="polite">
+        <p class="verse-preview-label">川柳（確認用）</p>
+        <output class="verse-preview-text"
+                data-verse-parts-target="preview"
+                aria-label="川柳の確認"></output>
+      </div>
     </div>
 
     <div class="form-actions">

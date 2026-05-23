@@ -31,6 +31,12 @@ class PostsController < ApplicationController
   end
 
   def edit
+    if @post.verse_upper.blank? && @post.verse_middle.blank? && @post.verse_lower.blank? && @post.verse.present?
+      parts = @post.verse.split(/[　 ]/, 3)
+      @post.verse_upper  = parts[0]
+      @post.verse_middle = parts[1]
+      @post.verse_lower  = parts[2]
+    end
   end
 
   def update
@@ -82,7 +88,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:verse, :keyword_id)
+    params.require(:post).permit(:verse, :verse_upper, :verse_middle, :verse_lower, :keyword_id)
   end
 
   def post_error_message(post)
